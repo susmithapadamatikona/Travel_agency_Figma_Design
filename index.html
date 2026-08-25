@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Phines Travels — Don't call it a dream. Call it a plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ============ NAV — sibling of .hero so the fixed/pinned bar isn't
+     trapped inside hero's isolated stacking context once scrolled ============ -->
+<nav class="nav" id="siteNav">
+  <a href="index.html" class="nav-logo" aria-label="Stackly home">
+    <img class="nav-logo-light" src="assets/images/logo-white.svg" alt="Stackly" />
+    <img class="nav-logo-dark" src="assets/images/logo.svg" alt="Stackly" />
+  </a>
+  <div class="nav-menu" id="navMenu">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="active" data-target="home">Home</a></li>
+      <li><a href="flights.html" data-target="flights">Flights</a></li>
+      <li><a href="hotels.html" data-target="hotels">Hotels</a></li>
+      <li><a href="discover.html" data-target="discover">Discover</a></li>
+      <li><a href="#about" data-target="about">About Us</a></li>
+      <li><a href="#contact" data-target="contact">Contact</a></li>
+    </ul>
+    <div class="nav-auth">
+      <a href="#" class="nav-login">Login</a>
+      <a href="#" class="btn-signup">Sign up</a>
+    </div>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="home">
+  <img class="hero-bg" src="assets/images/hero-lake-boat.jpg" alt="Boat on an emerald mountain lake" />
+  <div class="hero-shade"></div>
+
+  <div class="hero-content">
+    <h1 class="hero-title">Don&rsquo;t call it a dream. Call it a plan</h1>
+    <p class="hero-sub">Travel the way you wish to go with Phnes Travels helping you discover, live and travel<br />at your ownpace.</p>
+  </div>
+
+  <form class="search-bar" id="searchForm">
+    <div class="search-field" id="fieldFrom" data-field="from">
+      <svg viewBox="0 0 24 24" class="ic"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+      <input type="text" id="fromInput" placeholder="From" autocomplete="off" />
+    </div>
+    <span class="search-div"></span>
+    <div class="search-field" id="fieldTo" data-field="to">
+      <svg viewBox="0 0 24 24" class="ic"><path d="M21 3 3 10.5l7.2 2.8L13 21l8-18Z"/></svg>
+      <input type="text" id="toInput" placeholder="To" autocomplete="off" />
+    </div>
+    <span class="search-div"></span>
+    <div class="search-field" id="fieldDate" data-field="date">
+      <svg viewBox="0 0 24 24" class="ic"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      <input type="text" id="dateInput" placeholder="Date of stay" readonly autocomplete="off" />
+    </div>
+    <span class="search-div"></span>
+    <div class="search-field" id="fieldTraveler" data-field="traveler">
+      <svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6"/></svg>
+      <input type="text" id="travelerInput" placeholder="Traveler - Class" readonly autocomplete="off" />
+    </div>
+    <button class="btn-find" type="button" id="findTripBtn">
+      Find trip now
+      <svg viewBox="0 0 24 24" class="ic-search"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    </button>
+  </form>
+</header>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="container about-grid">
+    <div class="about-visual-wrap" data-reveal>
+      <div class="about-visual">
+        <div class="arch arch-1">
+          <img src="assets/images/about-traveler.jpg" alt="Traveler walking with a suitcase at the airport" />
+        </div>
+        <div class="arch arch-2">
+          <img src="assets/images/about-boats.jpg" alt="Colourful painted boats on the canal" />
+        </div>
+        <div class="arch arch-3">
+          <img src="assets/images/about-lake.jpg" alt="Rowing boat on a turquoise mountain lake" />
+        </div>
+      </div>
+    </div>
+
+    <div class="about-copy" data-reveal>
+      <span class="eyebrow">About</span>
+      <h2 class="section-title">Plan your perfect trip</h2>
+      <p class="about-text">
+        Are you looking for an adventurous travel, or just carrying your work alongside you while
+        you travel and explore new places, then your perfect trip is one with us. Phnes travels help
+        you search flights &amp; places, book your most convenient hotels/places at your comfort
+        while we help you discover the world. Welcome to a new dispensation.
+      </p>
+
+      <div class="stats">
+        <div class="stat"><span class="stat-num">150+</span><span class="stat-label">Flight Destinations</span></div>
+        <div class="stat"><span class="stat-num">250+</span><span class="stat-label">Hotels</span></div>
+        <div class="stat"><span class="stat-num">80</span><span class="stat-label">Elite Transportation</span></div>
+        <div class="stat"><span class="stat-num">40+</span><span class="stat-label">We help to find your dream place</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOP DESTINATIONS ============ -->
+<section class="destinations" id="destinations">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Top Destinations</span>
+        <h2 class="section-title">Discover your love</h2>
+      </div>
+      <div class="dest-controls">
+        <div class="nav-round">
+          <button class="round round-ghost" id="destPrev" aria-label="Previous destinations">
+            <svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg>
+          </button>
+          <button class="round round-solid" id="destNext" aria-label="Next destinations">
+            <svg viewBox="0 0 24 24"><path d="m9 4 8 8-8 8"/></svg>
+          </button>
+        </div>
+        <a href="#" class="btn-outline">See all</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container carousel-clip">
+    <div class="dest-row" id="destRow">
+
+      <article class="dest-card" data-reveal>
+        <div class="dest-img">
+          <img src="assets/images/dest-phuket.jpg" alt="Phuket, Thailand" draggable="false" />
+        </div>
+        <div class="dest-foot">
+          <div>
+            <h3 class="dest-name">Phuket</h3>
+            <p class="dest-loc">
+              <svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+              Thailand
+            </p>
+          </div>
+          <div class="avatars">
+            <img src="assets/images/avatars/av-12.jpg" alt="" />
+            <img src="assets/images/avatars/av-32.jpg" alt="" />
+            <img src="assets/images/avatars/av-45.jpg" alt="" />
+            <span class="avatar-more">+10</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="dest-card" data-reveal>
+        <div class="dest-img">
+          <img src="assets/images/dest-santorini.jpg" alt="Santorini, Greece" draggable="false" />
+        </div>
+        <div class="dest-foot">
+          <div>
+            <h3 class="dest-name">Santorini</h3>
+            <p class="dest-loc">
+              <svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+              Greece
+            </p>
+          </div>
+          <div class="avatars">
+            <img src="assets/images/avatars/av-5.jpg" alt="" />
+            <img src="assets/images/avatars/av-23.jpg" alt="" />
+            <img src="assets/images/avatars/av-60.jpg" alt="" />
+            <span class="avatar-more">+10</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="dest-card" data-reveal>
+        <div class="dest-img">
+          <img src="assets/images/dest-paris.jpg" alt="Paris, France" draggable="false" />
+        </div>
+        <div class="dest-foot">
+          <div>
+            <h3 class="dest-name">Paris</h3>
+            <p class="dest-loc">
+              <svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+              France
+            </p>
+          </div>
+          <div class="avatars">
+            <img src="assets/images/avatars/av-15.jpg" alt="" />
+            <img src="assets/images/avatars/av-28.jpg" alt="" />
+            <img src="assets/images/avatars/av-52.jpg" alt="" />
+            <span class="avatar-more">+10</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLIGHTS / HOTELS ============ -->
+<section class="promos" id="flights">
+  <div class="container promo-grid">
+
+    <article class="promo" data-reveal>
+      <img class="promo-bg" src="assets/images/promo-flights.jpg" alt="Aircraft seen from the terminal" />
+      <div class="promo-shade"></div>
+      <div class="promo-body">
+        <h3 class="promo-title">Flights</h3>
+        <p class="promo-sub">Search flights &amp; places and book for your amazing trips</p>
+        <a href="#" class="btn-white">
+          <svg viewBox="0 0 24 24" class="ic-plane"><path d="M21 15.5 3 10.2l3.1-1.6 5 1.5 4.1-2.2-6.3-3.6L11.6 3l9.4 4.1-.1 8.4Z"/><path d="M4 19h16"/></svg>
+          Show flights
+        </a>
+      </div>
+    </article>
+
+    <article class="promo" data-reveal>
+      <img class="promo-bg" src="assets/images/promo-hotels.jpg" alt="Tropical resort villas" />
+      <div class="promo-shade"></div>
+      <div class="promo-body">
+        <h3 class="promo-title">Hotels</h3>
+        <p class="promo-sub">Search our best hotels &amp; places and book for your amazing trips</p>
+        <a href="#" class="btn-white">
+          <svg viewBox="0 0 24 24" class="ic-plane"><path d="M3 20V7l9-4 9 4v13"/><path d="M9 20v-6h6v6"/></svg>
+          Show hotels
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="testimonials" id="testimonials">
+  <img class="tm-bg" src="assets/images/testimonial-bay.jpg" alt="Aerial view of a tropical bay" />
+  <div class="tm-shade"></div>
+
+  <button class="tm-arrow tm-prev" id="tmPrev" aria-label="Previous testimonial">
+    <svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg>
+  </button>
+  <button class="tm-arrow tm-next" id="tmNext" aria-label="Next testimonial">
+    <svg viewBox="0 0 24 24"><path d="m9 4 8 8-8 8"/></svg>
+  </button>
+
+  <div class="tm-inner" data-reveal>
+    <span class="eyebrow eyebrow-light">Testimonials</span>
+    <h2 class="section-title light">What they say about us</h2>
+
+    <p class="tm-quote" id="tmQuote">&ldquo;A real sense of community, nurtured&rdquo; Really appreciate the help and support<br />from the staff during my trips. Very helpful and always available when needed.</p>
+
+    <div class="stars stars-lg">
+      <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+    </div>
+
+    <h4 class="tm-name" id="tmName">Alice Smith</h4>
+
+    <div class="tm-avatars" id="tmAvatars">
+      <img data-i="0" src="assets/images/avatars/av-11.jpg" alt="Marco Rossi" />
+      <img data-i="1" src="assets/images/avatars/av-47.jpg" alt="Aiko Tanaka" />
+      <img data-i="2" class="is-active" src="assets/images/avatars/av-32.jpg" alt="Alice Smith" />
+      <img data-i="3" src="assets/images/avatars/av-13.jpg" alt="Daniel Kim" />
+      <img data-i="4" src="assets/images/avatars/av-68.jpg" alt="Sofia Martins" />
+    </div>
+
+    <div class="tm-dots" id="tmDots">
+      <span data-i="0"></span><span data-i="1"></span><span data-i="2" class="is-active"></span><span data-i="3"></span><span data-i="4"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HAPPY CUSTOMERS ============ -->
+<section class="happy" id="happy">
+  <div class="container">
+    <div class="sec-head">
+      <h2 class="section-title">Happy Customers Says</h2>
+      <div class="nav-round">
+        <button class="round round-ghost" id="happyPrev" aria-label="Previous customers">
+          <svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg>
+        </button>
+        <button class="round round-solid" id="happyNext" aria-label="Next customers">
+          <svg viewBox="0 0 24 24"><path d="m9 4 8 8-8 8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="happy-grid" id="happyGrid">
+      <article class="happy-card" data-reveal>
+        <img class="happy-avatar" src="assets/images/avatars/av-33.jpg" alt="Lyod Gomez" />
+        <h4 class="happy-name">Lyod Gomez</h4>
+        <span class="q-mark q-open">&rdquo;</span>
+        <p class="happy-text">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure</p>
+        <span class="q-mark q-close">&rdquo;</span>
+      </article>
+
+      <article class="happy-card" data-reveal>
+        <img class="happy-avatar" src="assets/images/avatars/av-52.jpg" alt="Lyod Gomez" />
+        <h4 class="happy-name">Lyod Gomez</h4>
+        <span class="q-mark q-open">&rdquo;</span>
+        <p class="happy-text">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure</p>
+        <span class="q-mark q-close">&rdquo;</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOG ============ -->
+<section class="blog" id="blog">
+  <div class="container">
+    <div class="blog-head">
+      <h2 class="section-title">Our Blog</h2>
+      <div class="blog-head-right">
+        <p class="blog-sub">Stay up to date with the latest tech trands and news in the pets.</p>
+        <a href="#" class="btn-outline-orange">View All</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container carousel-clip">
+    <div class="blog-row" id="blogRow">
+
+      <article class="blog-card" data-reveal>
+        <div class="blog-media blog-media-blue">
+          <span class="blog-date">21 june 2021</span>
+          <img src="assets/images/blog-1.jpg" alt="Silhouette on a rocky cliff at sunset" draggable="false" />
+        </div>
+        <h3 class="blog-title">The Amazing Difference a Year of Travelling .</h3>
+        <p class="blog-text">There isn't a relationship around that can survive without trust. My relationship with my dog Peyton is deep&hellip;</p>
+      </article>
+
+      <article class="blog-card" data-reveal>
+        <div class="blog-media blog-media-orange">
+          <span class="blog-date">28 june 2021</span>
+          <img src="assets/images/blog-2.jpg" alt="Jagged mountain peaks at dusk" draggable="false" />
+        </div>
+        <h3 class="blog-title">Reflections on 5 Months of Travel: Time to Hang</h3>
+        <p class="blog-text">Doting pet parents have a relentless need to constantly photograph every adorable pet moment&hellip;</p>
+      </article>
+
+      <article class="blog-card" data-reveal>
+        <div class="blog-media blog-media-pink">
+          <span class="blog-date">10 july 2021</span>
+          <img src="assets/images/blog-3.jpg" alt="Haystack Rock on the beach at sunset" draggable="false" />
+        </div>
+        <h3 class="blog-title">How to Save Money While Visiting Africa .</h3>
+        <p class="blog-text">It is easy to forget that animals are living creatures with a beating heart.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="reviews">
+  <div class="container carousel-clip">
+    <div class="rev-row" id="revRow">
+
+      <article class="rev-card" data-reveal>
+        <h4 class="rev-title">&ldquo;A real sense of community, nurtured&rdquo;</h4>
+        <p class="rev-text">Really appreciate the help and support from the staff during these tough times. Shoutout to Katie for helping me during...</p>
+        <div class="rev-meta">
+          <div class="stars"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
+          <a href="#" class="rev-more">View more</a>
+        </div>
+        <p class="rev-author">Olga</p>
+        <p class="rev-role">Weave Studios &ndash; Kai Tak</p>
+        <div class="rev-img"><img src="assets/images/review-1.jpg" alt="" draggable="false" /></div>
+      </article>
+
+      <article class="rev-card" data-reveal>
+        <h4 class="rev-title">&ldquo;A real sense of community, nurtured&rdquo;</h4>
+        <p class="rev-text">Really appreciate the help and support from the staff during these tough times. Shoutout to Katie for helping me during...</p>
+        <div class="rev-meta">
+          <div class="stars"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
+          <a href="#" class="rev-more">View more</a>
+        </div>
+        <p class="rev-author">Olga</p>
+        <p class="rev-role">Weave Studios &ndash; Kai Tak</p>
+        <div class="rev-img"><img src="assets/images/review-2.jpg" alt="" draggable="false" /></div>
+      </article>
+
+      <article class="rev-card" data-reveal>
+        <h4 class="rev-title">&ldquo;A real sense of community, nurtured&rdquo;</h4>
+        <p class="rev-text">Really appreciate the help and support from the staff during these tough times. Shoutout to Katie for helping me during...</p>
+        <div class="rev-meta">
+          <div class="stars"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
+          <a href="#" class="rev-more">View more</a>
+        </div>
+        <p class="rev-author">Olga</p>
+        <p class="rev-role">Weave Studios &ndash; Kai Tak</p>
+        <div class="rev-img"><img src="assets/images/review-3.jpg" alt="" draggable="false" /></div>
+      </article>
+
+      <article class="rev-card" data-reveal>
+        <h4 class="rev-title">&ldquo;A real sense of community, nurtured&rdquo;</h4>
+        <p class="rev-text">Really appreciate the help and support from the staff during these tough times. Shoutout to Katie for helping me during...</p>
+        <div class="rev-meta">
+          <div class="stars"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
+          <a href="#" class="rev-more">View more</a>
+        </div>
+        <p class="rev-author">Olga</p>
+        <p class="rev-role">Weave Studios &ndash; Kai Tak</p>
+        <div class="rev-img"><img src="assets/images/review-4.jpg" alt="" draggable="false" /></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" id="contact">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" aria-label="Stackly home"><img src="assets/images/logo-white.svg" alt="Stackly" /></a>
+    </div>
+
+    <div class="footer-social">
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.25-1.5 1.55-1.5H16.7V4.6A21 21 0 0 0 14.3 4.5c-2.4 0-4 1.45-4 4.12v2.28H7.6V14h2.7v8Z"/></svg></a>
+      <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.9a8 8 0 0 1-2.36.65 4.1 4.1 0 0 0 1.8-2.27 8.2 8.2 0 0 1-2.6 1A4.1 4.1 0 0 0 11.8 9a11.6 11.6 0 0 1-8.44-4.3 4.1 4.1 0 0 0 1.27 5.5 4 4 0 0 1-1.86-.52 4.1 4.1 0 0 0 3.29 4.08 4.1 4.1 0 0 1-1.85.07 4.1 4.1 0 0 0 3.83 2.85A8.25 8.25 0 0 1 2 18.4a11.6 11.6 0 0 0 6.29 1.84c7.55 0 11.68-6.25 11.68-11.67v-.53A8.3 8.3 0 0 0 22 5.9Z"/></svg></a>
+      <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15.1V8.9l5.2 3.1Z"/></svg></a>
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.9c3 0 3.3 0 4.5.07 1.1.05 1.7.23 2.1.39.5.2.9.45 1.3.85.4.4.65.8.85 1.3.16.4.34 1 .39 2.1.06 1.2.07 1.5.07 4.5s0 3.3-.07 4.5c-.05 1.1-.23 1.7-.39 2.1-.2.5-.45.9-.85 1.3-.4.4-.8.65-1.3.85-.4.16-1 .34-2.1.39-1.2.06-1.5.07-4.5.07s-3.3 0-4.5-.07c-1.1-.05-1.7-.23-2.1-.39a3.5 3.5 0 0 1-1.3-.85 3.5 3.5 0 0 1-.85-1.3c-.16-.4-.34-1-.39-2.1C2.9 15.3 2.9 15 2.9 12s0-3.3.07-4.5c.05-1.1.23-1.7.39-2.1.2-.5.45-.9.85-1.3.4-.4.8-.65 1.3-.85.4-.16 1-.34 2.1-.39C8.7 2.9 9 2.9 12 2.9Zm0 3.75A5.35 5.35 0 1 0 17.35 12 5.35 5.35 0 0 0 12 6.65Zm0 8.82A3.47 3.47 0 1 1 15.47 12 3.47 3.47 0 0 1 12 15.47Zm6.82-9.03a1.25 1.25 0 1 1-1.25-1.25 1.25 1.25 0 0 1 1.25 1.25Z"/></svg></a>
+    </div>
+
+    <div class="footer-col">
+      <h5>Links</h5>
+      <ul>
+        <li><a href="flights.html">Flights</a></li>
+        <li><a href="#">Stays</a></li>
+        <li><a href="discover.html">Discover</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Our Activities</h5>
+      <ul>
+        <li><a href="#">Tour</a></li>
+        <li><a href="#">Kayaking</a></li>
+        <li><a href="#">Cruising &amp; Sailing</a></li>
+        <li><a href="#">Multi-activities</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>About Us</h5>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Work with us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col footer-contact">
+      <h5>Contact</h5>
+      <ul>
+        <li>Address: Pa.Holandia No.205A</li>
+        <li>Millennium City, PH17</li>
+        <li>Phone: 023 456 7890</li>
+        <li>Email:</li>
+        <li>phines.travels@mail.com</li>
+        <li>Maps: Millennium City, Accra</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hotels — Phines Travels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav nav--solid" id="siteNav" data-static-solid data-no-scrollspy>
+  <a href="index.html" class="nav-logo" aria-label="Stackly home">
+    <img class="nav-logo-light" src="assets/images/logo-white.svg" alt="Stackly" />
+    <img class="nav-logo-dark" src="assets/images/logo.svg" alt="Stackly" />
+  </a>
+  <div class="nav-menu" id="navMenu">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#home" data-target="home">Home</a></li>
+      <li><a href="flights.html" data-target="flights">Flights</a></li>
+      <li><a href="hotels.html" class="active" data-target="hotels">Hotels</a></li>
+      <li><a href="discover.html" data-target="discover">Discover</a></li>
+      <li><a href="index.html#about" data-target="about">About Us</a></li>
+      <li><a href="index.html#contact" data-target="contact">Contact</a></li>
+    </ul>
+    <div class="nav-user">
+      <a href="#" class="nav-fav">
+        <svg viewBox="0 0 24 24" class="ic-heart"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4a4.9 4.9 0 0 1 6.6 2 4.9 4.9 0 0 1 6.6-2c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg>
+        Favourites
+      </a>
+      <span class="nav-user-div"></span>
+      <button class="nav-account" id="accountToggle" aria-haspopup="true" aria-expanded="false" aria-controls="accountPanel">
+        <span class="nav-avatar-wrap">
+          <img src="assets/images/avatars/av-32.jpg" alt="Ann Pine" />
+          <span class="nav-avatar-dot"></span>
+        </span>
+        <span class="nav-account-name">Ann Pine</span>
+      </button>
+
+      <div class="account-panel" id="accountPanel">
+        <div class="account-panel-head">
+          <img src="assets/images/avatars/av-32.jpg" alt="Ann Pine" />
+          <div>
+            <strong>Ann Pine</strong>
+            <span class="account-status">Online</span>
+          </div>
+        </div>
+        <ul class="account-menu">
+          <li><a href="#"><svg viewBox="0 0 24 24" class="ic-menu"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6"/></svg>My account<svg viewBox="0 0 24 24" class="ic-chev"><path d="m9 5 6 7-6 7"/></svg></a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" class="ic-menu"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>Payments<svg viewBox="0 0 24 24" class="ic-chev"><path d="m9 5 6 7-6 7"/></svg></a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" class="ic-menu"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .34 1.87l.06.06a2.05 2.05 0 1 1-2.9 2.9l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V20a2.05 2.05 0 1 1-4.1 0v-.09a1.7 1.7 0 0 0-1.1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2.05 2.05 0 1 1-2.9-2.9l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.55-1H4a2.05 2.05 0 1 1 0-4.1h.09A1.7 1.7 0 0 0 5.64 9.4a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2.05 2.05 0 1 1 2.9-2.9l.06.06a1.7 1.7 0 0 0 1.87.34H10a1.7 1.7 0 0 0 1-1.55V3a2.05 2.05 0 1 1 4.1 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2.05 2.05 0 1 1 2.9 2.9l-.06.06a1.7 1.7 0 0 0-.34 1.87V9.4a1.7 1.7 0 0 0 1.55 1H20a2.05 2.05 0 1 1 0 4.1h-.09a1.7 1.7 0 0 0-1.55 1Z"/></svg>Settings<svg viewBox="0 0 24 24" class="ic-chev"><path d="m9 5 6 7-6 7"/></svg></a></li>
+        </ul>
+        <ul class="account-menu account-menu-bottom">
+          <li><a href="#"><svg viewBox="0 0 24 24" class="ic-menu"><circle cx="12" cy="12" r="9"/><path d="M12 17v.01M12 14a2.2 2.2 0 1 0-2.2-2.2"/></svg>Support<svg viewBox="0 0 24 24" class="ic-chev"><path d="m9 5 6 7-6 7"/></svg></a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" class="ic-menu"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="fhero" id="fhero">
+  <img class="fhero-bg" src="assets/images/hotels-hero.jpg" alt="Tropical resort pool with palm trees and umbrellas" style="object-position:50% 30%" />
+  <div class="fhero-shade"></div>
+
+  <div class="fhero-content">
+    <h1 class="fhero-title">Create your travel wish list and<br />leave the rest for us.</h1>
+    <p class="fhero-sub">Special offers to suit your plan.</p>
+  </div>
+
+  <form class="search-bar fhero-search" id="searchForm">
+    <div class="search-field" id="fieldFrom" data-field="from">
+      <svg viewBox="0 0 24 24" class="ic"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+      <input type="text" id="fromInput" placeholder="From" autocomplete="off" />
+    </div>
+    <span class="search-div"></span>
+    <div class="search-field" id="fieldTo" data-field="to">
+      <svg viewBox="0 0 24 24" class="ic"><path d="M21 3 3 10.5l7.2 2.8L13 21l8-18Z"/></svg>
+      <input type="text" id="toInput" placeholder="To" autocomplete="off" />
+    </div>
+    <span class="search-div"></span>
+    <div class="search-field" id="fieldDate" data-field="date">
+      <svg viewBox="0 0 24 24" class="ic"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      <input type="text" id="dateInput" placeholder="Date of stay" readonly autocomplete="off" />
+    </div>
+    <span class="search-div"></span>
+    <div class="search-field" id="fieldTraveler" data-field="traveler">
+      <svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6"/></svg>
+      <input type="text" id="travelerInput" placeholder="Traveler - Class" readonly autocomplete="off" />
+    </div>
+    <button class="btn-find" type="button" id="findTripBtn">
+      Find trip now
+      <svg viewBox="0 0 24 24" class="ic-search"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    </button>
+  </form>
+</header>
+
+<!-- ============ RECENT SEARCHES ============ -->
+<section class="rs-section">
+  <div class="container">
+    <h2 class="rs-title">Recent searches</h2>
+    <div class="rs-row">
+      <a href="#" class="rs-item">
+        <img src="assets/images/recent-borabora.jpg" alt="Bora Bora" />
+        <span><strong>Bora Bora</strong><em>350 places</em></span>
+      </a>
+      <a href="#" class="rs-item">
+        <img src="assets/images/recent-london.jpg" alt="London, UK" />
+        <span><strong>London, UK</strong><em>315 places</em></span>
+      </a>
+      <a href="#" class="rs-item">
+        <img src="assets/images/recent-male.jpg" alt="Malé, Maldives" />
+        <span><strong>Mal&eacute;, Maldives</strong><em>300 places</em></span>
+      </a>
+      <a href="#" class="rs-item">
+        <img src="assets/images/recent-sydney.jpg" alt="Sydney, Australia" />
+        <span><strong>Sydney, Australia</strong><em>225 places</em></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BEST PLACE FOR VACATION ============ -->
+<section class="deals-section">
+  <div class="container">
+    <div class="deals-head">
+      <svg viewBox="0 0 24 24" class="deals-plane deals-plane-left"><path d="M21 15.5 3 10.2l3.1-1.6 5 1.5 4.1-2.2-6.3-3.6L11.6 3l9.4 4.1-.1 8.4Z"/></svg>
+      <h2 class="deals-title">The <strong>best place</strong> for vacation</h2>
+      <svg viewBox="0 0 24 24" class="deals-plane deals-plane-right"><path d="M21 15.5 3 10.2l3.1-1.6 5 1.5 4.1-2.2-6.3-3.6L11.6 3l9.4 4.1-.1 8.4Z"/></svg>
+    </div>
+
+    <div class="deals-tabs">
+      <button class="deals-tab is-active">Special Deals</button>
+      <button class="deals-tab">Populer</button>
+      <button class="deals-tab">Recommendation</button>
+      <button class="deals-tab">Best Price</button>
+    </div>
+
+    <div class="deals-grid">
+      <article class="deal-card" data-reveal>
+        <div class="deal-img">
+          <img src="assets/images/deal-tree.jpg" alt="Hurawalhi Island" draggable="false" />
+          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Maldives</span>
+          <span class="deal-rating">&#9733; 4.7</span>
+        </div>
+        <h3 class="deal-name">Hurawalhi Island</h3>
+        <p class="deal-sub">7 Days Tour on 2 person</p>
+        <div class="deal-meta"><span class="deal-price">620$</span><a href="#" class="deal-more">View More &rarr;</a></div>
+      </article>
+
+      <article class="deal-card" data-reveal>
+        <div class="deal-img">
+          <img src="assets/images/deal-lagoon.jpg" alt="Bali Province" draggable="false" />
+          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Indonesia</span>
+          <span class="deal-rating">&#9733; 4.7</span>
+        </div>
+        <h3 class="deal-name">Bali Province</h3>
+        <p class="deal-sub">4 days 2 person</p>
+        <div class="deal-meta"><span class="deal-price">780$</span><a href="#" class="deal-more">View More &rarr;</a></div>
+      </article>
+
+      <article class="deal-card" data-reveal>
+        <div class="deal-img">
+          <img src="assets/images/deal-mtnlake.jpg" alt="Barcelona city beach" draggable="false" />
+          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Spain</span>
+          <span class="deal-rating">&#9733; 4.7</span>
+        </div>
+        <h3 class="deal-name">Barcelona city beach</h3>
+        <p class="deal-sub">4 days 4 person</p>
+        <div class="deal-meta"><span class="deal-price">850$</span><a href="#" class="deal-more">View More &rarr;</a></div>
+      </article>
+
+      <article class="deal-card" data-reveal>
+        <div class="deal-img">
+          <img src="assets/images/deal-autumn.jpg" alt="Hurawalhi Island" draggable="false" />
+          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Maldives</span>
+          <span class="deal-rating">&#9733; 4.7</span>
+        </div>
+        <h3 class="deal-name">Hurawalhi Island</h3>
+        <p class="deal-sub">7 Days Tour on 2 person</p>
+        <div class="deal-meta"><span class="deal-price">620$</span><a href="#" class="deal-more">View More &rarr;</a></div>
+      </article>
+
+      <article class="deal-card" data-reveal>
+        <div class="deal-img">
+          <img src="assets/images/deal-dock.jpg" alt="St. John's" draggable="false" />
+          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Canada</span>
+          <span class="deal-rating">&#9733; 4.7</span>
+        </div>
+        <h3 class="deal-name">St. John's</h3>
+        <p class="deal-sub">7 Days Tour on 2 person</p>
+        <div class="deal-meta"><span class="deal-price">620$</span><a href="#" class="deal-more">View More &rarr;</a></div>
+      </article>
+
+      <article class="deal-card" data-reveal>
+        <div class="deal-img">
+          <img src="assets/images/deal-machu.jpg" alt="Machu Picchu" draggable="false" />
+          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Maldives</span>
+          <span class="deal-rating">&#9733; 4.7</span>
+        </div>
+        <h3 class="deal-name">Machu Picchu</h3>
+        <p class="deal-sub">7 Days Tour on 2 person</p>
+        <div class="deal-meta"><span class="deal-price">820$</span><a href="#" class="deal-more">View More &rarr;</a></div>
+      </article>
+
+      <article class="deal-card" data-reveal>
+        <div class="deal-img">
+          <img src="assets/images/deal-bora.jpg" alt="Bora Bora Island" draggable="false" />
+          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>French</span>
+          <span class="deal-rating">&#9733; 4.7</span>
+        </div>
+        <h3 class="deal-name">Bora Bora Island</h3>
+        <p class="deal-sub">7 Days Tour on 2 person</p>
+        <div class="deal-meta"><span class="deal-price">550$</span><a href="#" class="deal-more">View More &rarr;</a></div>
+      </article>
+
+      <article class="deal-card" data-reveal>
+        <div class="deal-img">
+          <img src="assets/images/deal-sydney.jpg" alt="Sydney Opera House" draggable="false" />
+          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Australia</span>
+          <span class="deal-rating">&#9733; 4.7</span>
+        </div>
+        <h3 class="deal-name">Sydney Opera House</h3>
+        <p class="deal-sub">7 Days Tour on 2 person</p>
+        <div class="deal-meta"><span class="deal-price">310$</span><a href="#" class="deal-more">View More &rarr;</a></div>
+      </article>
+    </div>
+
+    <div class="deals-viewall"><a href="#" class="btn-outline">View All</a></div>
+  </div>
+</section>
+
+<!-- ============ TOP HOTEL ============ -->
+<section class="th-section" id="tophotel">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Top Hotel</span>
+        <h2 class="section-title">Discover your love</h2>
+      </div>
+      <a href="#" class="btn-outline">See all</a>
+    </div>
+
+    <div class="th-grid">
+      <div class="th-feature" data-reveal>
+        <span class="th-price">From <strong>$200</strong></span>
+        <h3>Discover the best hotel in Greece</h3>
+        <p>Perched high above the Aegean Sea in this magical place, privy to the island's most emblematic views, it is any wonder that the picturesque sanctuary that is the Grace Hotel, Auberge Resorts Collection in Santorini, has come out on top of a poll of travel magazine readers as the Best Hotel in Greece and ranked as the second Best Hotel in the World?</p>
+        <button class="th-book">Book hotel</button>
+      </div>
+
+      <div class="th-photos" data-reveal>
+        <img src="assets/images/greece-dome1.jpg" alt="Santorini blue dome church" draggable="false" />
+        <img src="assets/images/greece-dome2.jpg" alt="Santorini caldera view" draggable="false" />
+        <img src="assets/images/dest-santorini.jpg" alt="Santorini village" draggable="false" />
+        <img src="assets/images/greece-dining.jpg" alt="Outdoor terrace dining with sea view" draggable="false" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FILTER SEARCH BAR ============ -->
+<section class="filter-bar-section">
+  <div class="container">
+    <form class="filter-bar" onsubmit="return false;">
+      <div class="filter-field">
+        <span class="filter-label">From</span>
+        <span class="filter-value">Accra (Kotota Int. Airport)</span>
+      </div>
+      <span class="search-div"></span>
+      <div class="filter-field">
+        <span class="filter-label">To</span>
+        <span class="filter-value">Dubai (Dubai Int. Airport)</span>
+      </div>
+      <span class="search-div"></span>
+      <div class="filter-field">
+        <span class="filter-label">Date of stay</span>
+        <span class="filter-value">29 Dec 22 - 06 Jan 23</span>
+      </div>
+      <span class="search-div"></span>
+      <div class="filter-field">
+        <span class="filter-label">Traveler - Class</span>
+        <span class="filter-value">2 Travelers, Economy</span>
+      </div>
+      <button class="filter-search-btn" type="button" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FILTERS + LISTINGS ============ -->
+<section class="listings-section">
+  <div class="container listings-layout">
+
+    <aside class="filters-col">
+      <div class="filters-box">
+        <h3 class="filters-head">Filters</h3>
+
+        <div class="filter-group">
+          <h4>Price Range</h4>
+          <div class="price-slider"><div class="price-slider-fill"></div><span class="price-dot" style="left:8%"></span><span class="price-dot" style="left:92%"></span></div>
+          <div class="price-range-labels"><span>$70</span><span>$5000</span></div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Amenities <svg viewBox="0 0 24 24" class="ic-chev-down"><path d="m6 9 6 6 6-6"/></svg></h4>
+          <label class="filter-check"><input type="checkbox" /> 24hr front desk</label>
+          <label class="filter-check"><input type="checkbox" /> Air-conditioned</label>
+          <label class="filter-check"><input type="checkbox" /> Fitness</label>
+          <label class="filter-check"><input type="checkbox" /> Pool</label>
+          <a href="#" class="filter-more">+24 more</a>
+        </div>
+
+        <div class="filter-group">
+          <h4>Freebies <svg viewBox="0 0 24 24" class="ic-chev-down"><path d="m6 9 6 6 6-6"/></svg></h4>
+          <label class="filter-check"><input type="checkbox" /> Free parking</label>
+          <label class="filter-check"><input type="checkbox" /> Free breakfast</label>
+          <label class="filter-check"><input type="checkbox" /> Free internet</label>
+          <label class="filter-check"><input type="checkbox" /> Free cancellation</label>
+        </div>
+
+        <div class="filter-group">
+          <h4>Rating <svg viewBox="0 0 24 24" class="ic-chev-down"><path d="m6 9 6 6 6-6"/></svg></h4>
+          <div class="rating-btns">
+            <button class="rating-btn">0+</button>
+            <button class="rating-btn">1+</button>
+            <button class="rating-btn is-active">2+</button>
+            <button class="rating-btn">3+</button>
+            <button class="rating-btn">4+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="otherdest-box">
+        <div class="sec-head">
+          <h3 class="otherdest-head">Other Destinations</h3>
+          <a href="#" class="btn-outline btn-outline-sm">See all</a>
+        </div>
+
+        <article class="otherdest-card" style="background-image:url('assets/images/other-maui.jpg')">
+          <div class="otherdest-info">
+            <span class="otherdest-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Hawaii</span>
+            <h4>The island of Maui</h4>
+            <a href="#" class="otherdest-btn">View more</a>
+          </div>
+        </article>
+
+        <article class="otherdest-card" style="background-image:url('assets/images/other-turks.jpg')">
+          <div class="otherdest-info">
+            <span class="otherdest-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>North of Dominican</span>
+            <h4>Turks and Caicos Islands</h4>
+            <a href="#" class="otherdest-btn">View more</a>
+          </div>
+        </article>
+
+        <article class="otherdest-card" style="background-image:url('assets/images/other-glacier.jpg')">
+          <div class="otherdest-info">
+            <span class="otherdest-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Montana</span>
+            <h4>Glacier National Park</h4>
+            <a href="#" class="otherdest-btn">View more</a>
+          </div>
+        </article>
+      </div>
+    </aside>
+
+    <div class="hlist-col">
+      <div class="hlist-tabs">
+        <button class="hlist-tab is-active">Hotels <span>257 places</span></button>
+        <button class="hlist-tab">Motels <span>51 places</span></button>
+        <button class="hlist-tab">Resorts <span>70 places</span></button>
+      </div>
+
+      <div class="hlist-toolbar">
+        <span>Showing 4 of 200 places</span>
+        <span class="hlist-sort">Sort by <strong>Recommended</strong> <svg viewBox="0 0 24 24" class="ic-chev-down"><path d="m6 9 6 6 6-6"/></svg></span>
+      </div>
+
+      <article class="hlist-card" data-reveal>
+        <div class="hlist-img"><img src="assets/images/hotel-atlantis.jpg" alt="Atlantis, The Palm" draggable="false" /><span class="hlist-count">8 images</span></div>
+        <div class="hlist-body">
+          <div class="hlist-top">
+            <div>
+              <h3>Atlantis, The Palm</h3>
+              <p class="hlist-addr">Crescent Rd, The Palm Jumeirah &ndash; Dubai, United Arab Emirates</p>
+              <p class="hlist-stars">&#9733;&#9733;&#9733;&#9733;&#9733; 5 Star Hotel &middot; 20+ Amenities</p>
+              <p class="hlist-score"><span>4.2</span> Amazing hotel (50 reviews)</p>
+            </div>
+            <div class="hlist-price">
+              <span class="hlist-from">starting from</span>
+              <span class="hlist-amount">$701</span>
+              <span class="hlist-tax">excl. tax</span>
+            </div>
+          </div>
+          <div class="hlist-actions">
+            <button class="hlist-fav" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4a4.9 4.9 0 0 1 6.6 2 4.9 4.9 0 0 1 6.6-2c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg></button>
+            <button class="hlist-book">Book now</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="hlist-card" data-reveal>
+        <div class="hlist-img"><img src="assets/images/hotel-sofitel.jpg" alt="Sofitel Dubai The Obelisk" draggable="false" /><span class="hlist-count">8 images</span></div>
+        <div class="hlist-body">
+          <div class="hlist-top">
+            <div>
+              <h3>Sofitel Dubai The Obelisk</h3>
+              <p class="hlist-addr">Sheikh Rashid Rd &ndash; Umm Hurair 2 &ndash; Dubai, United Arab Emirates</p>
+              <p class="hlist-stars">&#9733;&#9733;&#9733;&#9733;&#9733; 5 Star Hotel &middot; 20+ Amenities</p>
+              <p class="hlist-score"><span>4.2</span> Amazing hotel (50 reviews)</p>
+            </div>
+            <div class="hlist-price">
+              <span class="hlist-from">starting from</span>
+              <span class="hlist-amount">$602</span>
+              <span class="hlist-tax">excl. tax</span>
+            </div>
+          </div>
+          <div class="hlist-actions">
+            <button class="hlist-fav" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4a4.9 4.9 0 0 1 6.6 2 4.9 4.9 0 0 1 6.6-2c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg></button>
+            <button class="hlist-book">Book now</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="hlist-card" data-reveal>
+        <div class="hlist-img"><img src="assets/images/hotel-citymax.jpg" alt="Citymax Hotel Bur Dubai" draggable="false" /><span class="hlist-count">8 images</span></div>
+        <div class="hlist-body">
+          <div class="hlist-top">
+            <div>
+              <h3>Citymax Hotel Bur Dubai</h3>
+              <p class="hlist-addr">Kuwait Street, Mankhool &ndash; Dubai, United Arab Emirates</p>
+              <p class="hlist-stars">&#9733;&#9733;&#9733;&#9733;&#9733; 5 Star Hotel &middot; 20+ Amenities</p>
+              <p class="hlist-score"><span>4.2</span> Amazing hotel (50 reviews)</p>
+            </div>
+            <div class="hlist-price">
+              <span class="hlist-from">starting from</span>
+              <span class="hlist-amount">$127</span>
+              <span class="hlist-tax">excl. tax</span>
+            </div>
+          </div>
+          <div class="hlist-actions">
+            <button class="hlist-fav" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4a4.9 4.9 0 0 1 6.6 2 4.9 4.9 0 0 1 6.6-2c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg></button>
+            <button class="hlist-book">Book now</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="hlist-card" data-reveal>
+        <div class="hlist-img"><img src="assets/images/hotel-fivepalm.jpg" alt="Five Palm Jumeirah Dubai" draggable="false" /><span class="hlist-count">8 images</span></div>
+        <div class="hlist-body">
+          <div class="hlist-top">
+            <div>
+              <h3>Five Palm Jumeirah Dubai</h3>
+              <p class="hlist-addr">No.1 Palm &ndash; Dubai, United Arab Emirates</p>
+              <p class="hlist-stars">&#9733;&#9733;&#9733;&#9733;&#9733; 5 Star Hotel &middot; 20+ Amenities</p>
+              <p class="hlist-score"><span>4.2</span> Amazing hotel (50 reviews)</p>
+            </div>
+            <div class="hlist-price">
+              <span class="hlist-from">starting from</span>
+              <span class="hlist-amount">$447</span>
+              <span class="hlist-tax">excl. tax</span>
+            </div>
+          </div>
+          <div class="hlist-actions">
+            <button class="hlist-fav" aria-label="Save"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4a4.9 4.9 0 0 1 6.6 2 4.9 4.9 0 0 1 6.6-2c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg></button>
+            <button class="hlist-book">Book now</button>
+          </div>
+        </div>
+      </article>
+
+      <button class="hlist-showmore">Show more results</button>
+
+      <div class="pkg-row">
+        <a href="#" class="pkg-card" style="background-image:url('assets/images/pkg-france.jpg')"><span>France<em>200 Tour Packages</em></span></a>
+        <a href="#" class="pkg-card" style="background-image:url('assets/images/pkg-london.jpg')"><span>London<em>200 Tour Packages</em></span></a>
+        <a href="#" class="pkg-card" style="background-image:url('assets/images/pkg-uk.jpg')"><span>United Kingdom<em>200 Tour Packages</em></span></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" id="contact">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" aria-label="Stackly home"><img src="assets/images/logo-white.svg" alt="Stackly" /></a>
+    </div>
+
+    <div class="footer-social">
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.25-1.5 1.55-1.5H16.7V4.6A21 21 0 0 0 14.3 4.5c-2.4 0-4 1.45-4 4.12v2.28H7.6V14h2.7v8Z"/></svg></a>
+      <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.9a8 8 0 0 1-2.36.65 4.1 4.1 0 0 0 1.8-2.27 8.2 8.2 0 0 1-2.6 1A4.1 4.1 0 0 0 11.8 9a11.6 11.6 0 0 1-8.44-4.3 4.1 4.1 0 0 0 1.27 5.5 4 4 0 0 1-1.86-.52 4.1 4.1 0 0 0 3.29 4.08 4.1 4.1 0 0 1-1.85.07 4.1 4.1 0 0 0 3.83 2.85A8.25 8.25 0 0 1 2 18.4a11.6 11.6 0 0 0 6.29 1.84c7.55 0 11.68-6.25 11.68-11.67v-.53A8.3 8.3 0 0 0 22 5.9Z"/></svg></a>
+      <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15.1V8.9l5.2 3.1Z"/></svg></a>
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.9c3 0 3.3 0 4.5.07 1.1.05 1.7.23 2.1.39.5.2.9.45 1.3.85.4.4.65.8.85 1.3.16.4.34 1 .39 2.1.06 1.2.07 1.5.07 4.5s0 3.3-.07 4.5c-.05 1.1-.23 1.7-.39 2.1-.2.5-.45.9-.85 1.3-.4.4-.8.65-1.3.85-.4.16-1 .34-2.1.39-1.2.06-1.5.07-4.5.07s-3.3 0-4.5-.07c-1.1-.05-1.7-.23-2.1-.39a3.5 3.5 0 0 1-1.3-.85 3.5 3.5 0 0 1-.85-1.3c-.16-.4-.34-1-.39-2.1C2.9 15.3 2.9 15 2.9 12s0-3.3.07-4.5c.05-1.1.23-1.7.39-2.1.2-.5.45-.9.85-1.3.4-.4.8-.65 1.3-.85.4-.16 1-.34 2.1-.39C8.7 2.9 9 2.9 12 2.9Zm0 3.75A5.35 5.35 0 1 0 17.35 12 5.35 5.35 0 0 0 12 6.65Zm0 8.82A3.47 3.47 0 1 1 15.47 12 3.47 3.47 0 0 1 12 15.47Zm6.82-9.03a1.25 1.25 0 1 1-1.25-1.25 1.25 1.25 0 0 1 1.25 1.25Z"/></svg></a>
+    </div>
+
+    <div class="footer-col">
+      <h5>Links</h5>
+      <ul>
+        <li><a href="flights.html">Flights</a></li>
+        <li><a href="hotels.html">Stays</a></li>
+        <li><a href="discover.html">Discover</a></li>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Our Activities</h5>
+      <ul>
+        <li><a href="#">Tour</a></li>
+        <li><a href="#">Kayaking</a></li>
+        <li><a href="#">Cruising &amp; Sailing</a></li>
+        <li><a href="#">Multi-activities</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>About Us</h5>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Work with us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col footer-contact">
+      <h5>Contact</h5>
+      <ul>
+        <li>Address: Pa.Holandia No.205A</li>
+        <li>Millennium City, PH17</li>
+        <li>Phone: 023 456 7890</li>
+        <li>Email:</li>
+        <li>phines.travels@mail.com</li>
+        <li>Maps: Millennium City, Accra</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

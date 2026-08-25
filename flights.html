@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Flights — Phines Travels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ============ NAV — always solid on this page (data-static-solid),
+     with a Favourites link and an account dropdown instead of Login/Sign up ============ -->
+<nav class="nav nav--solid" id="siteNav" data-static-solid data-no-scrollspy>
+  <a href="index.html" class="nav-logo" aria-label="Stackly home">
+    <img class="nav-logo-light" src="assets/images/logo-white.svg" alt="Stackly" />
+    <img class="nav-logo-dark" src="assets/images/logo.svg" alt="Stackly" />
+  </a>
+  <div class="nav-menu" id="navMenu">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#home" data-target="home">Home</a></li>
+      <li><a href="flights.html" class="active" data-target="flights">Flights</a></li>
+      <li><a href="hotels.html" data-target="hotels">Hotels</a></li>
+      <li><a href="discover.html" data-target="discover">Discover</a></li>
+      <li><a href="index.html#about" data-target="about">About Us</a></li>
+      <li><a href="index.html#contact" data-target="contact">Contact</a></li>
+    </ul>
+    <div class="nav-user">
+      <a href="#" class="nav-fav">
+        <svg viewBox="0 0 24 24" class="ic-heart"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4a4.9 4.9 0 0 1 6.6 2 4.9 4.9 0 0 1 6.6-2c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg>
+        Favourites
+      </a>
+      <span class="nav-user-div"></span>
+      <button class="nav-account" id="accountToggle" aria-haspopup="true" aria-expanded="false" aria-controls="accountPanel">
+        <span class="nav-avatar-wrap">
+          <img src="assets/images/avatars/av-32.jpg" alt="Ann Pine" />
+          <span class="nav-avatar-dot"></span>
+        </span>
+        <span class="nav-account-name">Ann Pine</span>
+      </button>
+
+      <div class="account-panel" id="accountPanel">
+        <div class="account-panel-head">
+          <img src="assets/images/avatars/av-32.jpg" alt="Ann Pine" />
+          <div>
+            <strong>Ann Pine</strong>
+            <span class="account-status">Online</span>
+          </div>
+        </div>
+        <ul class="account-menu">
+          <li><a href="#"><svg viewBox="0 0 24 24" class="ic-menu"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6"/></svg>My account<svg viewBox="0 0 24 24" class="ic-chev"><path d="m9 5 6 7-6 7"/></svg></a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" class="ic-menu"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>Payments<svg viewBox="0 0 24 24" class="ic-chev"><path d="m9 5 6 7-6 7"/></svg></a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" class="ic-menu"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .34 1.87l.06.06a2.05 2.05 0 1 1-2.9 2.9l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V20a2.05 2.05 0 1 1-4.1 0v-.09a1.7 1.7 0 0 0-1.1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2.05 2.05 0 1 1-2.9-2.9l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.55-1H4a2.05 2.05 0 1 1 0-4.1h.09A1.7 1.7 0 0 0 5.64 9.4a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2.05 2.05 0 1 1 2.9-2.9l.06.06a1.7 1.7 0 0 0 1.87.34H10a1.7 1.7 0 0 0 1-1.55V3a2.05 2.05 0 1 1 4.1 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2.05 2.05 0 1 1 2.9 2.9l-.06.06a1.7 1.7 0 0 0-.34 1.87V9.4a1.7 1.7 0 0 0 1.55 1H20a2.05 2.05 0 1 1 0 4.1h-.09a1.7 1.7 0 0 0-1.55 1Z"/></svg>Settings<svg viewBox="0 0 24 24" class="ic-chev"><path d="m9 5 6 7-6 7"/></svg></a></li>
+        </ul>
+        <ul class="account-menu account-menu-bottom">
+          <li><a href="#"><svg viewBox="0 0 24 24" class="ic-menu"><circle cx="12" cy="12" r="9"/><path d="M12 17v.01M12 14a2.2 2.2 0 1 0-2.2-2.2"/></svg>Support<svg viewBox="0 0 24 24" class="ic-chev"><path d="m9 5 6 7-6 7"/></svg></a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" class="ic-menu"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============ FLIGHTS HERO ============ -->
+<header class="fhero" id="fhero">
+  <img class="fhero-bg" src="assets/images/flights-hero.jpg" alt="Commercial jet climbing into a clear blue sky" />
+  <div class="fhero-shade"></div>
+  <div class="fhero-bokeh"></div>
+
+  <div class="fhero-content">
+    <h1 class="fhero-title">Create your travel wish list and<br />leave the rest for us.</h1>
+    <p class="fhero-sub">Special offers to suit your plan.</p>
+  </div>
+
+  <form class="search-bar fhero-search" id="searchForm">
+    <div class="search-field" id="fieldFrom" data-field="from">
+      <svg viewBox="0 0 24 24" class="ic"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+      <input type="text" id="fromInput" placeholder="From" autocomplete="off" />
+    </div>
+    <span class="search-div"></span>
+    <div class="search-field" id="fieldTo" data-field="to">
+      <svg viewBox="0 0 24 24" class="ic"><path d="M21 3 3 10.5l7.2 2.8L13 21l8-18Z"/></svg>
+      <input type="text" id="toInput" placeholder="To" autocomplete="off" />
+    </div>
+    <span class="search-div"></span>
+    <div class="search-field" id="fieldDate" data-field="date">
+      <svg viewBox="0 0 24 24" class="ic"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      <input type="text" id="dateInput" placeholder="Date of stay" readonly autocomplete="off" />
+    </div>
+    <span class="search-div"></span>
+    <div class="search-field" id="fieldTraveler" data-field="traveler">
+      <svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6"/></svg>
+      <input type="text" id="travelerInput" placeholder="Traveler - Class" readonly autocomplete="off" />
+    </div>
+    <button class="btn-find" type="button" id="findTripBtn">
+      Find trip now
+      <svg viewBox="0 0 24 24" class="ic-search"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    </button>
+  </form>
+</header>
+
+<!-- ============ DESTINATION PRICE GRID ============ -->
+<section class="fdest-section" id="destinations">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Destinations</span>
+        <h2 class="section-title">Discover your love</h2>
+      </div>
+      <a href="#" class="btn-outline">See all</a>
+    </div>
+
+    <div class="fdest-grid">
+      <article class="fdest-card" data-reveal>
+        <div class="fdest-img">
+          <img src="assets/images/dp-paris.jpg" alt="Paris" draggable="false" />
+          <div class="fdest-overlay">
+            <div class="fdest-info"><h3>Paris</h3><p>A Paris Adventure</p></div>
+            <div class="fdest-price">$ 600</div>
+          </div>
+        </div>
+        <button class="fdest-book">Book flight</button>
+      </article>
+
+      <article class="fdest-card" data-reveal>
+        <div class="fdest-img">
+          <img src="assets/images/dp-borabora.jpg" alt="Bora Bora" draggable="false" />
+          <div class="fdest-overlay">
+            <div class="fdest-info"><h3>Bora Bora</h3><p>An amazing journey</p></div>
+            <div class="fdest-price">$ 1,500</div>
+          </div>
+        </div>
+        <button class="fdest-book">Book flight</button>
+      </article>
+
+      <article class="fdest-card" data-reveal>
+        <div class="fdest-img">
+          <img src="assets/images/dp-london.jpg" alt="London" draggable="false" />
+          <div class="fdest-overlay">
+            <div class="fdest-info"><h3>London</h3><p>An amazing journey</p></div>
+            <div class="fdest-price">$350</div>
+          </div>
+        </div>
+        <button class="fdest-book">Book flight</button>
+      </article>
+
+      <article class="fdest-card" data-reveal>
+        <div class="fdest-img">
+          <img src="assets/images/dp-tahiti.jpg" alt="Tahiti" draggable="false" />
+          <div class="fdest-overlay">
+            <div class="fdest-info"><h3>Tahiti</h3><p>An amazing journey</p></div>
+            <div class="fdest-price">$300</div>
+          </div>
+        </div>
+        <button class="fdest-book">Book flight</button>
+      </article>
+
+      <article class="fdest-card" data-reveal>
+        <div class="fdest-img">
+          <img src="assets/images/dp-rome.jpg" alt="Rome" draggable="false" />
+          <div class="fdest-overlay">
+            <div class="fdest-info"><h3>Rome</h3><p>Explore your taste</p></div>
+            <div class="fdest-price">$ 200</div>
+          </div>
+        </div>
+        <button class="fdest-book">Book flight</button>
+      </article>
+
+      <article class="fdest-card" data-reveal>
+        <div class="fdest-img">
+          <img src="assets/images/dp-dubai.jpg" alt="Dubai" draggable="false" />
+          <div class="fdest-overlay">
+            <div class="fdest-info"><h3>Dubai</h3><p>Explore your taste</p></div>
+            <div class="fdest-price">$ 230</div>
+          </div>
+        </div>
+        <button class="fdest-book">Book flight</button>
+      </article>
+
+      <article class="fdest-card" data-reveal>
+        <div class="fdest-img">
+          <img src="assets/images/dp-bali.jpg" alt="Bali" draggable="false" />
+          <div class="fdest-overlay">
+            <div class="fdest-info"><h3>Bali</h3><p>An amazing journey</p></div>
+            <div class="fdest-price">$850</div>
+          </div>
+        </div>
+        <button class="fdest-book">Book flight</button>
+      </article>
+
+      <article class="fdest-card" data-reveal>
+        <div class="fdest-img">
+          <img src="assets/images/dp-stlucia.jpg" alt="St Lucia" draggable="false" />
+          <div class="fdest-overlay">
+            <div class="fdest-info"><h3>St Lucia</h3><p>An amazing journey</p></div>
+            <div class="fdest-price">$446</div>
+          </div>
+        </div>
+        <button class="fdest-book">Book flight</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KAYAKING FEATURE ============ -->
+<section class="kayak-section" id="kayaking">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Kayaking</span>
+        <h2 class="section-title">Discover your love</h2>
+      </div>
+      <a href="#" class="btn-outline">See all</a>
+    </div>
+
+    <div class="kayak-grid">
+      <div class="kayak-feature" data-reveal>
+        <span class="kayak-price">From <strong>$600</strong></span>
+        <h3>Kayaking in Baja California</h3>
+        <p>Adventure cruising is more than a growing trend to connect with nature, wildlife, and yourself. It's a community of adventurers that is here to stay. With luxurious accommodations and unmatched scenery, our Baja kayaking is the perfect escape.</p>
+        <button class="kayak-book">Book flight</button>
+      </div>
+
+      <div class="kayak-photos" data-reveal>
+        <img src="assets/images/kayak-hero.jpg" alt="Kayaking on turquoise water" draggable="false" />
+        <img src="assets/images/kayak-hut.jpg" alt="Beach with thatched umbrellas" draggable="false" />
+        <img src="assets/images/kayak-road.jpg" alt="Aerial coastal road" draggable="false" />
+        <img src="assets/images/kayak-pool.jpg" alt="Resort pool with palm trees" draggable="false" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" id="contact">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" aria-label="Stackly home"><img src="assets/images/logo-white.svg" alt="Stackly" /></a>
+    </div>
+
+    <div class="footer-social">
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.25-1.5 1.55-1.5H16.7V4.6A21 21 0 0 0 14.3 4.5c-2.4 0-4 1.45-4 4.12v2.28H7.6V14h2.7v8Z"/></svg></a>
+      <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.9a8 8 0 0 1-2.36.65 4.1 4.1 0 0 0 1.8-2.27 8.2 8.2 0 0 1-2.6 1A4.1 4.1 0 0 0 11.8 9a11.6 11.6 0 0 1-8.44-4.3 4.1 4.1 0 0 0 1.27 5.5 4 4 0 0 1-1.86-.52 4.1 4.1 0 0 0 3.29 4.08 4.1 4.1 0 0 1-1.85.07 4.1 4.1 0 0 0 3.83 2.85A8.25 8.25 0 0 1 2 18.4a11.6 11.6 0 0 0 6.29 1.84c7.55 0 11.68-6.25 11.68-11.67v-.53A8.3 8.3 0 0 0 22 5.9Z"/></svg></a>
+      <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15.1V8.9l5.2 3.1Z"/></svg></a>
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.9c3 0 3.3 0 4.5.07 1.1.05 1.7.23 2.1.39.5.2.9.45 1.3.85.4.4.65.8.85 1.3.16.4.34 1 .39 2.1.06 1.2.07 1.5.07 4.5s0 3.3-.07 4.5c-.05 1.1-.23 1.7-.39 2.1-.2.5-.45.9-.85 1.3-.4.4-.8.65-1.3.85-.4.16-1 .34-2.1.39-1.2.06-1.5.07-4.5.07s-3.3 0-4.5-.07c-1.1-.05-1.7-.23-2.1-.39a3.5 3.5 0 0 1-1.3-.85 3.5 3.5 0 0 1-.85-1.3c-.16-.4-.34-1-.39-2.1C2.9 15.3 2.9 15 2.9 12s0-3.3.07-4.5c.05-1.1.23-1.7.39-2.1.2-.5.45-.9.85-1.3.4-.4.8-.65 1.3-.85.4-.16 1-.34 2.1-.39C8.7 2.9 9 2.9 12 2.9Zm0 3.75A5.35 5.35 0 1 0 17.35 12 5.35 5.35 0 0 0 12 6.65Zm0 8.82A3.47 3.47 0 1 1 15.47 12 3.47 3.47 0 0 1 12 15.47Zm6.82-9.03a1.25 1.25 0 1 1-1.25-1.25 1.25 1.25 0 0 1 1.25 1.25Z"/></svg></a>
+    </div>
+
+    <div class="footer-col">
+      <h5>Links</h5>
+      <ul>
+        <li><a href="flights.html">Flights</a></li>
+        <li><a href="index.html">Stays</a></li>
+        <li><a href="discover.html">Discover</a></li>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Our Activities</h5>
+      <ul>
+        <li><a href="#">Tour</a></li>
+        <li><a href="#">Kayaking</a></li>
+        <li><a href="#">Cruising &amp; Sailing</a></li>
+        <li><a href="#">Multi-activities</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>About Us</h5>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Work with us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col footer-contact">
+      <h5>Contact</h5>
+      <ul>
+        <li>Address: Pa.Holandia No.205A</li>
+        <li>Millennium City, PH17</li>
+        <li>Phone: 023 456 7890</li>
+        <li>Email:</li>
+        <li>phines.travels@mail.com</li>
+        <li>Maps: Millennium City, Accra</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
