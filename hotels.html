@@ -9,13 +9,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body class="hotels-page">
 
 <!-- ============ NAV ============ -->
 <nav class="nav nav--solid" id="siteNav" data-static-solid data-no-scrollspy>
   <a href="index.html" class="nav-logo" aria-label="Stackly home">
-    <img class="nav-logo-light" src="assets/images/logo-white.svg" alt="Stackly" />
-    <img class="nav-logo-dark" src="assets/images/logo.svg" alt="Stackly" />
+    <img class="nav-logo-light" src="assets/images/logo-white.webp" alt="Stackly" />
+    <img class="nav-logo-dark" src="assets/images/logo-dark.webp" alt="Stackly" />
   </a>
   <div class="nav-menu" id="navMenu">
     <ul class="nav-links" id="navLinks">
@@ -23,8 +23,8 @@
       <li><a href="flights.html" data-target="flights">Flights</a></li>
       <li><a href="hotels.html" class="active" data-target="hotels">Hotels</a></li>
       <li><a href="discover.html" data-target="discover">Discover</a></li>
-      <li><a href="index.html#about" data-target="about">About Us</a></li>
-      <li><a href="index.html#contact" data-target="contact">Contact</a></li>
+      <li><a href="about.html" data-target="about">About Us</a></li>
+      <li><a href="contact.html" data-target="contact">Contact</a></li>
     </ul>
     <div class="nav-user">
       <a href="#" class="nav-fav">
@@ -34,7 +34,7 @@
       <span class="nav-user-div"></span>
       <button class="nav-account" id="accountToggle" aria-haspopup="true" aria-expanded="false" aria-controls="accountPanel">
         <span class="nav-avatar-wrap">
-          <img src="assets/images/avatars/av-32.jpg" alt="Ann Pine" />
+          <img src="assets/images/avatars/av-32.webp" alt="Ann Pine" />
           <span class="nav-avatar-dot"></span>
         </span>
         <span class="nav-account-name">Ann Pine</span>
@@ -42,7 +42,7 @@
 
       <div class="account-panel" id="accountPanel">
         <div class="account-panel-head">
-          <img src="assets/images/avatars/av-32.jpg" alt="Ann Pine" />
+          <img src="assets/images/avatars/av-32.webp" alt="Ann Pine" />
           <div>
             <strong>Ann Pine</strong>
             <span class="account-status">Online</span>
@@ -67,7 +67,7 @@
 
 <!-- ============ HERO ============ -->
 <header class="fhero" id="fhero">
-  <img class="fhero-bg" src="assets/images/hotels-hero.jpg" alt="Tropical resort pool with palm trees and umbrellas" style="object-position:50% 30%" />
+  <img class="fhero-bg" src="assets/images/hotels-hero.webp" alt="Resort pool lined with sun loungers, umbrellas and palm trees" />
   <div class="fhero-shade"></div>
 
   <div class="fhero-content">
@@ -108,19 +108,19 @@
     <h2 class="rs-title">Recent searches</h2>
     <div class="rs-row">
       <a href="#" class="rs-item">
-        <img src="assets/images/recent-borabora.jpg" alt="Bora Bora" />
-        <span><strong>Bora Bora</strong><em>350 places</em></span>
+        <img src="assets/images/recent-borabora.webp" alt="Bora Bora" />
+        <span><strong>Bora Bora</strong><em>305 places</em></span>
       </a>
       <a href="#" class="rs-item">
-        <img src="assets/images/recent-london.jpg" alt="London, UK" />
+        <img src="assets/images/recent-london.webp" alt="London, UK" />
         <span><strong>London, UK</strong><em>315 places</em></span>
       </a>
       <a href="#" class="rs-item">
-        <img src="assets/images/recent-male.jpg" alt="Malé, Maldives" />
+        <img src="assets/images/recent-male.webp" alt="Malé, Maldives" />
         <span><strong>Mal&eacute;, Maldives</strong><em>300 places</em></span>
       </a>
       <a href="#" class="rs-item">
-        <img src="assets/images/recent-sydney.jpg" alt="Sydney, Australia" />
+        <img src="assets/images/recent-sydney.webp" alt="Sydney, Australia" />
         <span><strong>Sydney, Australia</strong><em>225 places</em></span>
       </a>
     </div>
@@ -146,10 +146,9 @@
     <div class="deals-grid">
       <article class="deal-card" data-reveal>
         <div class="deal-img">
-          <img src="assets/images/deal-tree.jpg" alt="Hurawalhi Island" draggable="false" />
-          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Maldives</span>
-          <span class="deal-rating">&#9733; 4.7</span>
+          <img src="assets/images/deal-tree.webp" alt="Hurawalhi Island" draggable="false" />
         </div>
+        <div class="deal-top"><span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Maldives</span><span class="deal-rating">&#9733; <b>4.7</b></span></div>
         <h3 class="deal-name">Hurawalhi Island</h3>
         <p class="deal-sub">7 Days Tour on 2 person</p>
         <div class="deal-meta"><span class="deal-price">620$</span><a href="#" class="deal-more">View More &rarr;</a></div>
@@ -157,10 +156,9 @@
 
       <article class="deal-card" data-reveal>
         <div class="deal-img">
-          <img src="assets/images/deal-lagoon.jpg" alt="Bali Province" draggable="false" />
-          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Indonesia</span>
-          <span class="deal-rating">&#9733; 4.7</span>
+          <img src="assets/images/deal-lagoon.webp" alt="Bali Province" draggable="false" />
         </div>
+        <div class="deal-top"><span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Indonesia</span><span class="deal-rating">&#9733; <b>4.7</b></span></div>
         <h3 class="deal-name">Bali Province</h3>
         <p class="deal-sub">4 days 2 person</p>
         <div class="deal-meta"><span class="deal-price">780$</span><a href="#" class="deal-more">View More &rarr;</a></div>
@@ -168,10 +166,9 @@
 
       <article class="deal-card" data-reveal>
         <div class="deal-img">
-          <img src="assets/images/deal-mtnlake.jpg" alt="Barcelona city beach" draggable="false" />
-          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Spain</span>
-          <span class="deal-rating">&#9733; 4.7</span>
+          <img src="assets/images/deal-mtnlake.webp" alt="Barcelona city beach" draggable="false" />
         </div>
+        <div class="deal-top"><span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Spain</span><span class="deal-rating">&#9733; <b>4.7</b></span></div>
         <h3 class="deal-name">Barcelona city beach</h3>
         <p class="deal-sub">4 days 4 person</p>
         <div class="deal-meta"><span class="deal-price">850$</span><a href="#" class="deal-more">View More &rarr;</a></div>
@@ -179,10 +176,9 @@
 
       <article class="deal-card" data-reveal>
         <div class="deal-img">
-          <img src="assets/images/deal-autumn.jpg" alt="Hurawalhi Island" draggable="false" />
-          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Maldives</span>
-          <span class="deal-rating">&#9733; 4.7</span>
+          <img src="assets/images/deal-autumn.webp" alt="Hurawalhi Island" draggable="false" />
         </div>
+        <div class="deal-top"><span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Maldives</span><span class="deal-rating">&#9733; <b>4.7</b></span></div>
         <h3 class="deal-name">Hurawalhi Island</h3>
         <p class="deal-sub">7 Days Tour on 2 person</p>
         <div class="deal-meta"><span class="deal-price">620$</span><a href="#" class="deal-more">View More &rarr;</a></div>
@@ -190,10 +186,9 @@
 
       <article class="deal-card" data-reveal>
         <div class="deal-img">
-          <img src="assets/images/deal-dock.jpg" alt="St. John's" draggable="false" />
-          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Canada</span>
-          <span class="deal-rating">&#9733; 4.7</span>
+          <img src="assets/images/deal-dock.webp" alt="St. John's" draggable="false" />
         </div>
+        <div class="deal-top"><span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Canada</span><span class="deal-rating">&#9733; <b>4.7</b></span></div>
         <h3 class="deal-name">St. John's</h3>
         <p class="deal-sub">7 Days Tour on 2 person</p>
         <div class="deal-meta"><span class="deal-price">620$</span><a href="#" class="deal-more">View More &rarr;</a></div>
@@ -201,10 +196,9 @@
 
       <article class="deal-card" data-reveal>
         <div class="deal-img">
-          <img src="assets/images/deal-machu.jpg" alt="Machu Picchu" draggable="false" />
-          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Maldives</span>
-          <span class="deal-rating">&#9733; 4.7</span>
+          <img src="assets/images/deal-machu.webp" alt="Machu Picchu" draggable="false" />
         </div>
+        <div class="deal-top"><span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Maldives</span><span class="deal-rating">&#9733; <b>4.7</b></span></div>
         <h3 class="deal-name">Machu Picchu</h3>
         <p class="deal-sub">7 Days Tour on 2 person</p>
         <div class="deal-meta"><span class="deal-price">820$</span><a href="#" class="deal-more">View More &rarr;</a></div>
@@ -212,10 +206,9 @@
 
       <article class="deal-card" data-reveal>
         <div class="deal-img">
-          <img src="assets/images/deal-bora.jpg" alt="Bora Bora Island" draggable="false" />
-          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>French</span>
-          <span class="deal-rating">&#9733; 4.7</span>
+          <img src="assets/images/deal-bora.webp" alt="Bora Bora Island" draggable="false" />
         </div>
+        <div class="deal-top"><span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>French</span><span class="deal-rating">&#9733; <b>4.7</b></span></div>
         <h3 class="deal-name">Bora Bora Island</h3>
         <p class="deal-sub">7 Days Tour on 2 person</p>
         <div class="deal-meta"><span class="deal-price">550$</span><a href="#" class="deal-more">View More &rarr;</a></div>
@@ -223,10 +216,9 @@
 
       <article class="deal-card" data-reveal>
         <div class="deal-img">
-          <img src="assets/images/deal-sydney.jpg" alt="Sydney Opera House" draggable="false" />
-          <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Australia</span>
-          <span class="deal-rating">&#9733; 4.7</span>
+          <img src="assets/images/deal-sydney.webp" alt="Sydney Opera House" draggable="false" />
         </div>
+        <div class="deal-top"><span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Australia</span><span class="deal-rating">&#9733; <b>4.7</b></span></div>
         <h3 class="deal-name">Sydney Opera House</h3>
         <p class="deal-sub">7 Days Tour on 2 person</p>
         <div class="deal-meta"><span class="deal-price">310$</span><a href="#" class="deal-more">View More &rarr;</a></div>
@@ -257,10 +249,10 @@
       </div>
 
       <div class="th-photos" data-reveal>
-        <img src="assets/images/greece-dome1.jpg" alt="Santorini blue dome church" draggable="false" />
-        <img src="assets/images/greece-dome2.jpg" alt="Santorini caldera view" draggable="false" />
-        <img src="assets/images/dest-santorini.jpg" alt="Santorini village" draggable="false" />
-        <img src="assets/images/greece-dining.jpg" alt="Outdoor terrace dining with sea view" draggable="false" />
+        <img src="assets/images/greece-dome1.webp" alt="Santorini blue dome church" draggable="false" />
+        <img src="assets/images/greece-dome2.webp" alt="Santorini caldera view" draggable="false" />
+        <img src="assets/images/dest-santorini.webp" alt="Santorini village" draggable="false" />
+        <img src="assets/images/greece-dining.webp" alt="Outdoor terrace dining with sea view" draggable="false" />
       </div>
     </div>
   </div>
@@ -345,29 +337,29 @@
           <a href="#" class="btn-outline btn-outline-sm">See all</a>
         </div>
 
-        <article class="otherdest-card" style="background-image:url('assets/images/other-maui.jpg')">
+        <a href="#" class="otherdest-card otherdest-card--art" style="background-image:url('assets/images/other-maui.webp')">
           <div class="otherdest-info">
             <span class="otherdest-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Hawaii</span>
             <h4>The island of Maui</h4>
-            <a href="#" class="otherdest-btn">View more</a>
+            <span class="otherdest-btn">View more</span>
           </div>
-        </article>
+        </a>
 
-        <article class="otherdest-card" style="background-image:url('assets/images/other-turks.jpg')">
+        <a href="#" class="otherdest-card otherdest-card--art" style="background-image:url('assets/images/other-turks.webp')">
           <div class="otherdest-info">
             <span class="otherdest-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>North of Dominican</span>
             <h4>Turks and Caicos Islands</h4>
-            <a href="#" class="otherdest-btn">View more</a>
+            <span class="otherdest-btn">View more</span>
           </div>
-        </article>
+        </a>
 
-        <article class="otherdest-card" style="background-image:url('assets/images/other-glacier.jpg')">
+        <a href="#" class="otherdest-card otherdest-card--art" style="background-image:url('assets/images/other-glacier.webp')">
           <div class="otherdest-info">
             <span class="otherdest-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Montana</span>
             <h4>Glacier National Park</h4>
-            <a href="#" class="otherdest-btn">View more</a>
+            <span class="otherdest-btn">View more</span>
           </div>
-        </article>
+        </a>
       </div>
     </aside>
 
@@ -384,7 +376,7 @@
       </div>
 
       <article class="hlist-card" data-reveal>
-        <div class="hlist-img"><img src="assets/images/hotel-atlantis.jpg" alt="Atlantis, The Palm" draggable="false" /><span class="hlist-count">8 images</span></div>
+        <div class="hlist-img"><img src="assets/images/hotel-atlantis.webp" alt="Atlantis, The Palm" draggable="false" /><span class="hlist-count">8 images</span></div>
         <div class="hlist-body">
           <div class="hlist-top">
             <div>
@@ -407,7 +399,7 @@
       </article>
 
       <article class="hlist-card" data-reveal>
-        <div class="hlist-img"><img src="assets/images/hotel-sofitel.jpg" alt="Sofitel Dubai The Obelisk" draggable="false" /><span class="hlist-count">8 images</span></div>
+        <div class="hlist-img"><img src="assets/images/hotel-sofitel.webp" alt="Sofitel Dubai The Obelisk" draggable="false" /><span class="hlist-count">8 images</span></div>
         <div class="hlist-body">
           <div class="hlist-top">
             <div>
@@ -430,7 +422,7 @@
       </article>
 
       <article class="hlist-card" data-reveal>
-        <div class="hlist-img"><img src="assets/images/hotel-citymax.jpg" alt="Citymax Hotel Bur Dubai" draggable="false" /><span class="hlist-count">8 images</span></div>
+        <div class="hlist-img"><img src="assets/images/hotel-citymax.webp" alt="Citymax Hotel Bur Dubai" draggable="false" /><span class="hlist-count">8 images</span></div>
         <div class="hlist-body">
           <div class="hlist-top">
             <div>
@@ -453,7 +445,7 @@
       </article>
 
       <article class="hlist-card" data-reveal>
-        <div class="hlist-img"><img src="assets/images/hotel-fivepalm.jpg" alt="Five Palm Jumeirah Dubai" draggable="false" /><span class="hlist-count">8 images</span></div>
+        <div class="hlist-img"><img src="assets/images/hotel-fivepalm.webp" alt="Five Palm Jumeirah Dubai" draggable="false" /><span class="hlist-count">8 images</span></div>
         <div class="hlist-body">
           <div class="hlist-top">
             <div>
@@ -478,9 +470,9 @@
       <button class="hlist-showmore">Show more results</button>
 
       <div class="pkg-row">
-        <a href="#" class="pkg-card" style="background-image:url('assets/images/pkg-france.jpg')"><span>France<em>200 Tour Packages</em></span></a>
-        <a href="#" class="pkg-card" style="background-image:url('assets/images/pkg-london.jpg')"><span>London<em>200 Tour Packages</em></span></a>
-        <a href="#" class="pkg-card" style="background-image:url('assets/images/pkg-uk.jpg')"><span>United Kingdom<em>200 Tour Packages</em></span></a>
+        <a href="#" class="pkg-card" style="background-image:url('assets/images/pkg-france.webp')"><span>France<em>200 Tour Packages</em></span></a>
+        <a href="#" class="pkg-card" style="background-image:url('assets/images/pkg-london.webp')"><span>London<em>200 Tour Packages</em></span></a>
+        <a href="#" class="pkg-card" style="background-image:url('assets/images/pkg-uk.webp')"><span>United Kingdom<em>200 Tour Packages</em></span></a>
       </div>
     </div>
 
@@ -491,7 +483,7 @@
 <footer class="footer" id="contact">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <a href="index.html" aria-label="Stackly home"><img src="assets/images/logo-white.svg" alt="Stackly" /></a>
+      <a href="index.html" aria-label="Stackly home"><img src="assets/images/logo-white.webp" alt="Stackly" /></a>
     </div>
 
     <div class="footer-social">
@@ -527,6 +519,9 @@
       <ul>
         <li><a href="#">Our Story</a></li>
         <li><a href="#">Work with us</a></li>
+        <li><a href="#">Why Choose Us</a></li>
+        <li><a href="#">Our Partners</a></li>
+        <li><a href="#">Travel Guides</a></li>
       </ul>
     </div>
 

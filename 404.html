@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Page Not Found — Stackly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="not-found-page">
+  <main class="not-found-shell">
+    <a href="index.html" class="not-found-logo" aria-label="Stackly home"><img src="assets/images/logo-dark.webp" alt="Stackly" /></a>
+    <section class="not-found-card" aria-labelledby="notFoundTitle">
+      <div class="not-found-mark" aria-hidden="true"><span>?</span></div>
+      <p class="not-found-label">Page not found</p>
+      <span class="not-found-code" aria-hidden="true">404</span>
+      <h1 id="notFoundTitle">Looks like you&rsquo;re off the map.</h1>
+      <p class="not-found-copy">The page you selected is unavailable or may have moved. Let&rsquo;s get you back to planning your next trip.</p>
+      <div class="not-found-actions">
+        <button class="not-found-back" id="notFoundBack" type="button">Go back</button>
+        <a class="not-found-home" href="index.html?instantNav=1#home">Back to home <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </section>
+  </main>
+<script>
+  (function () {
+    var backButton = document.getElementById('notFoundBack');
+    if (!backButton) return;
+
+    backButton.addEventListener('click', function () {
+      /* Return to the exact in-site page the visitor came from. If the 404
+         page was opened directly, send them to the home section instead. */
+      var previousPage = sessionStorage.getItem('stackly404Return') || document.referrer;
+      sessionStorage.removeItem('stackly404Return');
+      if (previousPage && new URL(previousPage).origin === window.location.origin) {
+        var destination = new URL(previousPage);
+        destination.searchParams.set('instantNav', '1');
+        window.location.replace(destination.href);
+      } else {
+        window.location.replace('index.html?instantNav=1#home');
+      }
+    });
+  }());
+</script>
+</body>
+</html>

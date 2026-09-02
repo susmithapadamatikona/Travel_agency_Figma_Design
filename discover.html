@@ -14,8 +14,8 @@
 <!-- ============ NAV ============ -->
 <nav class="nav nav--solid" id="siteNav" data-static-solid data-no-scrollspy>
   <a href="index.html" class="nav-logo" aria-label="Stackly home">
-    <img class="nav-logo-light" src="assets/images/logo-white.svg" alt="Stackly" />
-    <img class="nav-logo-dark" src="assets/images/logo.svg" alt="Stackly" />
+    <img class="nav-logo-light" src="assets/images/logo-white.webp" alt="Stackly" />
+    <img class="nav-logo-dark" src="assets/images/logo-dark.webp" alt="Stackly" />
   </a>
   <div class="nav-menu" id="navMenu">
     <ul class="nav-links" id="navLinks">
@@ -23,12 +23,12 @@
       <li><a href="flights.html" data-target="flights">Flights</a></li>
       <li><a href="hotels.html" data-target="hotels">Hotels</a></li>
       <li><a href="discover.html" class="active" data-target="discover">Discover</a></li>
-      <li><a href="index.html#about" data-target="about">About Us</a></li>
-      <li><a href="index.html#contact" data-target="contact">Contact</a></li>
+      <li><a href="about.html" data-target="about">About Us</a></li>
+      <li><a href="contact.html" data-target="contact">Contact</a></li>
     </ul>
     <div class="nav-auth">
-      <a href="#" class="nav-login">Login</a>
-      <a href="#" class="btn-signup">Sign up</a>
+      <a href="login.html" class="nav-login">Login</a>
+      <a href="signup.html" class="btn-signup">Sign up</a>
     </div>
   </div>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenu">
@@ -38,9 +38,11 @@
 
 <!-- ============ HERO ============ -->
 <header class="dhero">
-  <img src="assets/images/discover-hero.jpg" alt="Person looking out over a turquoise glacial lake in the Southern Alps, New Zealand" />
-  <div class="dhero-shade"></div>
-  <h1 class="dhero-title">Discover</h1>
+  <!-- the reference artwork bakes both the "Discover" heading and the dark
+       overlay into the image itself, so neither is layered in HTML — the
+       visually-hidden h1 keeps the page's heading for screen readers/SEO -->
+  <img src="assets/images/discover-hero.webp" alt="Person standing on a rock looking over Hooker Lake and its floating iceberg, Aoraki/Mount Cook, New Zealand" />
+  <h1 class="sr-only">Discover</h1>
 </header>
 
 <!-- ============ ARTICLE ============ -->
@@ -53,7 +55,7 @@
       <p>In the north is Abel Tasman National Park, known for its trails and ocean kayaking. Queenstown is famed for adventure sports like bungee jumping and skiing.</p>
 
       <div class="discover-img">
-        <img src="assets/images/discover-river.jpg" alt="Turquoise glacial river winding through a rocky New Zealand valley" />
+        <img src="assets/images/discover-river.webp" alt="Turquoise glacial river winding through a rocky New Zealand valley" />
       </div>
 
       <h3>Natural Geographic Features</h3>
@@ -63,8 +65,8 @@
       <p>A number of lakes in the Fiordland and Otago regions also fill glacial valleys. Lake Te Anau has three western arms which are fiords (and are named so). Lake McKerrow / Whakatipu Waitai to the north of Milford Sound / Piopiotahi is a fiord with a silted-up mouth. Lake Wakatipu fills a large glacial valley, as do lakes Hakapoua, Poteriteri, Monowai and Hauroko in the far south of Fiordland. Lake Manapouri has fiords as its west, north and south arms..</p>
 
       <div class="discover-img-pair">
-        <img src="assets/images/discover-milford.jpg" alt="Milford Sound with mountain peaks, cloud and a boat on the water" />
-        <img src="assets/images/discover-glacier.jpg" alt="Aerial close-up of blue crevasses in a glacier" />
+        <img src="assets/images/discover-milford.webp" alt="Milford Sound with mountain peaks, cloud and a boat on the water" />
+        <img src="assets/images/discover-glacier.webp" alt="Aerial close-up of blue crevasses in a glacier" />
       </div>
 
       <p>Most of New Zealand's glaciers are in the South Island. They are generally found in the Southern Alps near the Main Divide..</p>
@@ -73,7 +75,7 @@
 
     <aside class="discover-sidebar">
       <div class="discover-map">
-        <img src="assets/images/discover-map.png" alt="Map of New Zealand's North and South Islands" />
+        <img src="assets/images/discover-map.webp" alt="Map of New Zealand's North and South Islands" />
       </div>
 
       <div class="otherdest-box">
@@ -82,29 +84,29 @@
           <a href="#" class="btn-outline btn-outline-sm">See all</a>
         </div>
 
-        <article class="otherdest-card" style="background-image:url('assets/images/other-maui.jpg')">
+        <a href="#" class="otherdest-card otherdest-card--art" style="background-image:url('assets/images/other-maui.webp')">
           <div class="otherdest-info">
             <span class="otherdest-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Hawaii</span>
             <h4>The island of Maui</h4>
-            <a href="#" class="otherdest-btn">View more</a>
+            <span class="otherdest-btn">View more</span>
           </div>
-        </article>
+        </a>
 
-        <article class="otherdest-card" style="background-image:url('assets/images/other-turks.jpg')">
+        <a href="#" class="otherdest-card otherdest-card--art" style="background-image:url('assets/images/other-turks.webp')">
           <div class="otherdest-info">
             <span class="otherdest-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>North of Dominican Republic</span>
             <h4>Turks and Caicos Islands</h4>
-            <a href="#" class="otherdest-btn">View more</a>
+            <span class="otherdest-btn">View more</span>
           </div>
-        </article>
+        </a>
 
-        <article class="otherdest-card" style="background-image:url('assets/images/other-glacier.jpg')">
+        <a href="#" class="otherdest-card otherdest-card--art" style="background-image:url('assets/images/other-glacier.webp')">
           <div class="otherdest-info">
             <span class="otherdest-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Montana</span>
             <h4>Glacier National Park</h4>
-            <a href="#" class="otherdest-btn">View more</a>
+            <span class="otherdest-btn">View more</span>
           </div>
-        </article>
+        </a>
       </div>
     </aside>
 
@@ -115,7 +117,7 @@
 <footer class="footer" id="contact">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <a href="index.html" aria-label="Stackly home"><img src="assets/images/logo-white.svg" alt="Stackly" /></a>
+      <a href="index.html" aria-label="Stackly home"><img src="assets/images/logo-white.webp" alt="Stackly" /></a>
     </div>
 
     <div class="footer-social">
@@ -151,6 +153,9 @@
       <ul>
         <li><a href="#">Our Story</a></li>
         <li><a href="#">Work with us</a></li>
+        <li><a href="#">Why Choose Us</a></li>
+        <li><a href="#">Our Partners</a></li>
+        <li><a href="#">Travel Guides</a></li>
       </ul>
     </div>
 

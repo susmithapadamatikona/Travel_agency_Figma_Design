@@ -37,6 +37,87 @@ img { display: block; max-width: 100%; }
 a   { text-decoration: none; color: inherit; }
 ul  { list-style: none; }
 
+/* ---- site preloader ---- */
+.site-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: var(--teal-deep);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .35s ease, visibility .35s ease;
+}
+.site-preloader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.site-preloader__content { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.site-preloader__logo { width: 174px; height: auto; }
+.site-preloader__spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(255, 255, 255, .28);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: preloader-spin .8s linear infinite;
+}
+@keyframes preloader-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .site-preloader { transition: none; }
+  .site-preloader__spinner { animation: none; }
+}
+
+/* ---- shared card interactions ----
+   A single hover language keeps the browsing experience cohesive: cards lift
+   slightly, gain a soft teal surface, and receive a deeper but restrained
+   shadow. Applied only to browseable content cards, not form/login panels. */
+.dest-card, .rev-card, .blog-card, .promo, .happy-card, .fdest-card,
+.deal-card, .hlist-card, .trip-card, .dash-trip, .otherdest-card,
+.pkg-card, .rs-item {
+  transition: transform .28s cubic-bezier(.22, 1, .36, 1),
+              background-color .28s ease,
+              border-color .28s ease,
+              box-shadow .28s ease;
+}
+.dest-name, .deal-name, .hlist-card h3, .trip-card h3, .dash-trip h3,
+.rev-title, .happy-name { transition: color .28s ease; }
+
+@media (hover: hover) {
+  .dest-card:hover, .rev-card:hover, .blog-card:hover, .promo:hover,
+  .happy-card:hover, .fdest-card:hover, .deal-card:hover, .hlist-card:hover,
+  .trip-card:hover, .dash-trip:hover, .otherdest-card:hover, .pkg-card:hover,
+  .rs-item:hover {
+    transform: translateY(-6px);
+    background-color: #cfeae6;
+    border-color: rgba(22, 128, 122, .62);
+    box-shadow: 0 18px 34px rgba(14, 62, 64, .22);
+  }
+
+  .dest-card:hover .dest-name,
+  .deal-card:hover .deal-name,
+  .hlist-card:hover h3,
+  .trip-card:hover h3,
+  .dash-trip:hover h3,
+  .rev-card:hover .rev-title,
+  .happy-card:hover .happy-name {
+    color: var(--teal);
+  }
+}
+
+.dest-card:focus-within, .rev-card:focus-within, .blog-card:focus-within,
+.promo:focus-within, .happy-card:focus-within, .fdest-card:focus-within,
+.deal-card:focus-within, .hlist-card:focus-within, .trip-card:focus-within,
+.dash-trip:focus-within, .otherdest-card:focus-visible, .pkg-card:focus-visible,
+.rs-item:focus-visible {
+  outline: 3px solid rgba(22, 128, 122, .45);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dest-card, .rev-card, .blog-card, .promo, .happy-card, .fdest-card,
+  .deal-card, .hlist-card, .trip-card, .dash-trip, .otherdest-card,
+  .pkg-card, .rs-item { transition: none; }
+}
+
 /* content box measures 1336px — matches the Figma content column */
 .container {
   width: 100%;
@@ -50,8 +131,25 @@ ul  { list-style: none; }
 
 /* progressive-enhancement scroll reveal — JS adds .reveal, so content
    never disappears if JavaScript fails to load */
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--aos-duration, .7s) cubic-bezier(.22, 1, .36, 1),
+              transform var(--aos-duration, .7s) cubic-bezier(.22, 1, .36, 1),
+              background-color .28s ease,
+              border-color .28s ease,
+              box-shadow .28s ease;
+}
+.reveal[data-aos="fade-left"] { transform: translateX(34px); }
+.reveal[data-aos="fade-right"] { transform: translateX(-34px); }
+.reveal[data-aos="zoom-in"] { transform: scale(.94); }
 .reveal.in-view { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal[data-aos="fade-left"],
+  .reveal[data-aos="fade-right"],
+  .reveal[data-aos="zoom-in"] { opacity: 1; transform: none; transition: none; }
+}
 
 /* ---- shared type ---- */
 .eyebrow {
@@ -73,6 +171,82 @@ ul  { list-style: none; }
 }
 .section-title.light { color: #fff; }
 
+/* ---- 404 page ---- */
+.not-found-page {
+  min-height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(circle at 12% 15%, #d0eeea 0 11%, transparent 11.2%),
+              radial-gradient(circle at 90% 86%, #c5e7e3 0 13%, transparent 13.2%),
+              linear-gradient(135deg, #f4fbfa 0%, #e9f6f4 100%);
+}
+.not-found-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 28px;
+  padding: 32px 24px;
+}
+.not-found-logo img { width: 164px; height: auto; }
+.not-found-card {
+  position: relative;
+  width: min(100%, 610px);
+  overflow: hidden;
+  padding: 46px 52px 50px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid rgba(22, 128, 122, .18);
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgba(14, 62, 64, .14);
+}
+.not-found-card::before,
+.not-found-card::after { content: ''; position: absolute; border-radius: 50%; pointer-events: none; }
+.not-found-card::before { width: 150px; height: 150px; top: -94px; left: -82px; background: #e2f4f1; }
+.not-found-card::after { width: 110px; height: 110px; right: -64px; bottom: -58px; background: #d5efeb; }
+.not-found-mark {
+  position: relative;
+  z-index: 1;
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+  border: 8px solid #d6efeb;
+  border-radius: 50%;
+  background: var(--teal-deep);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(14, 62, 64, .18);
+}
+.not-found-mark span { font-size: 38px; font-weight: 700; line-height: 1; transform: translateY(-1px); }
+.not-found-label { position: relative; z-index: 1; margin-top: 20px; color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; }
+.not-found-code { position: relative; z-index: 1; display: block; margin-top: 7px; color: #d6efeb; font-size: 92px; font-weight: 700; line-height: .9; letter-spacing: -5px; }
+.not-found-card h1 { position: relative; z-index: 1; margin-top: -7px; color: var(--ink); font-size: 31px; line-height: 1.2; }
+.not-found-copy { position: relative; z-index: 1; max-width: 410px; margin: 14px auto 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.not-found-actions { position: relative; z-index: 1; display: flex; justify-content: center; gap: 12px; margin-top: 30px; }
+.not-found-back,
+.not-found-home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 21px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.not-found-back { border: 1px solid #a8d8d1; background: #fff; color: var(--teal-deep); font-family: inherit; cursor: pointer; }
+.not-found-home { gap: 8px; background: var(--teal-deep); color: #fff; }
+.not-found-back:hover { border-color: var(--teal); background: #eaf7f5; transform: translateY(-2px); }
+.not-found-home:hover { background: var(--teal); transform: translateY(-2px); }
+@media (max-width: 520px) {
+  .not-found-card { padding: 40px 24px 42px; }
+  .not-found-code { font-size: 78px; }
+  .not-found-card h1 { font-size: 27px; }
+  .not-found-actions { flex-direction: column-reverse; }
+  .not-found-back, .not-found-home { width: 100%; }
+}
+
 /* ---- shared stars ---- */
 .stars { display: inline-flex; gap: 2px; color: var(--amber); font-size: 13px; line-height: 1; }
 .stars-lg { font-size: 20px; gap: 4px; }
@@ -82,8 +256,9 @@ ul  { list-style: none; }
    ========================================================= */
 .hero {
   position: relative;
-  height: 720px;
-  margin: 24px 24px 0;
+  width: min(1452px, calc(100% - 48px));
+  height: 737px;
+  margin: 24px auto 0;
   border-radius: 24px;
   overflow: hidden;
   isolation: isolate;
@@ -465,6 +640,7 @@ ul  { list-style: none; }
    ABOUT
    ========================================================= */
 .about { padding: 110px 0 90px; }
+.about > .container { max-width: 1400px; }
 
 .about-grid {
   display: grid;
@@ -480,29 +656,37 @@ ul  { list-style: none; }
    on its own — the wrapper's own width/height is what the grid track
    actually sizes against, which is what keeps small screens from
    overflowing horizontally. */
-.about-visual-wrap { width: 592px; height: 445px; }
-.about-visual { position: relative; width: 592px; height: 445px; }
+/* geometry measured directly off the Figma export (Group 34.png):
+   each shape overlaps the one below it, and the upper shape carries an
+   ~11.5px page-coloured ring so a clean gutter is cut out of its neighbour
+   — 13px between cards 1/2 and 10px between cards 2/3, matching the design.
+   The ring is drawn with box-shadow (not a border) so it sits OUTSIDE the
+   shape and never eats into the photo. */
+.about-visual-wrap { width: 579px; height: 448px; }
+.about-visual { position: relative; width: 579px; height: 448px; }
 .arch { position: absolute; overflow: hidden; }
 .arch img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .arch-1 img { object-position: 32% 12%; }   /* keep the traveler + suitcase in frame */
 
 .arch-1 {                                  /* airport traveler  */
   left: 0; top: 0;
-  width: 285px; height: 437px;
-  border-radius: 112px 56px 56px 56px;
+  width: 273px; height: 448px;
+  border-radius: 95px;
   z-index: 1;
 }
 .arch-2 {                                  /* canal boats — pill */
-  left: 268px; top: 57px;
-  width: 210px; height: 388px;
-  border-radius: 105px;
+  left: 267px; top: 113px;
+  width: 199px; height: 335px;
+  border-radius: 99.5px;
   z-index: 2;
+  box-shadow: 0 0 0 11.5px var(--page-bg, #fff);
 }
 .arch-3 {                                  /* mountain lake — pill */
   left: 400px; top: 0;
-  width: 192px; height: 293px;
-  border-radius: 96px;
+  width: 179px; height: 310px;
+  border-radius: 89.5px;
   z-index: 3;
+  box-shadow: 0 0 0 10.5px var(--page-bg, #fff);
 }
 
 .about-copy { max-width: 666px; }
@@ -604,6 +788,14 @@ ul  { list-style: none; }
 }
 .dest-img { border-radius: 14px; overflow: hidden; height: 320px; }
 .dest-img img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Desktop destination carousel: three cards plus two 24px gaps hug to
+   1634px wide. The 439px cards and 20px carousel gutter hug to 459px tall. */
+@media (min-width: 901px) {
+  .dest-row { width: 100%; }
+  .dest-card { flex-basis: calc((1634px - 48px) / 3); height: 439px; }
+  .dest-img { height: 345px; }
+}
 
 .dest-foot {
   display: flex;
@@ -707,8 +899,9 @@ ul  { list-style: none; }
    ========================================================= */
 .testimonials {
   position: relative;
-  margin-top: 68px;
-  min-height: 670px;
+  width: min(1512px, 100%);
+  height: 674px;
+  margin: 68px auto 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -798,6 +991,16 @@ ul  { list-style: none; }
 .happy { padding: 100px 0 0; }
 .happy .sec-head { align-items: center; margin-bottom: 40px; }
 
+@media (min-width: 1101px) {
+  .happy {
+    width: min(1420px, calc(100% - 48px));
+    height: 513px;
+    margin: 100px auto 0;
+    padding: 0;
+  }
+  .happy > .container { max-width: none; padding: 0; }
+}
+
 .nav-round { display: flex; gap: 12px; }
 .round {
   width: 40px; height: 40px;
@@ -840,7 +1043,7 @@ ul  { list-style: none; }
   color: var(--ink);
 }
 .happy-text {
-  margin-top: 16px;
+  margin-top: 21px;
   text-align: left;
   font-size: 12.5px;
   line-height: 2.1;
@@ -862,6 +1065,16 @@ ul  { list-style: none; }
    BLOG
    ========================================================= */
 .blog { padding: 100px 0 20px; }
+
+@media (min-width: 1101px) {
+  .blog {
+    width: min(1320px, calc(100% - 48px));
+    height: 702px;
+    margin: 100px auto 0;
+    padding: 0;
+  }
+  .blog > .container { max-width: none; padding: 0; }
+}
 
 .blog-head {
   display: flex;
@@ -897,7 +1110,11 @@ ul  { list-style: none; }
 }
 .btn-outline-orange:hover { background: var(--orange); color: #fff; }
 
-.blog-card { flex: 0 0 420px; }
+.blog-card {
+  display: flex;
+  flex: 0 0 420px;
+  flex-direction: column;
+}
 
 /* colour panel sits full-size behind the photo; the photo is inset from
    the top-left so a strip of colour shows through as a backdrop */
@@ -943,6 +1160,13 @@ ul  { list-style: none; }
   color: var(--muted);
 }
 
+/* Keep the blog row visually even when individual headlines or excerpts
+   have different lengths. The content remains naturally sized on mobile. */
+@media (min-width: 701px) {
+  .blog-title { min-height: 54px; }
+  .blog-text { min-height: 70px; }
+}
+
 /* =========================================================
    REVIEWS
    ========================================================= */
@@ -973,7 +1197,7 @@ ul  { list-style: none; }
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 16px;
+  margin-top: 21px;
 }
 .rev-more { font-size: 11.5px; font-weight: 500; color: var(--orange); }
 .rev-more:hover { text-decoration: underline; }
@@ -984,22 +1208,36 @@ ul  { list-style: none; }
 .rev-img { margin-top: 16px; border-radius: 8px; overflow: hidden; height: 150px; }
 .rev-img img { width: 100%; height: 100%; object-fit: cover; }
 
+/* Desktop review carousel: cards keep a consistent width but grow only as
+   tall as their content. This keeps each travel image close to its review. */
+@media (min-width: 1101px) {
+  .rev-row { width: max-content; }
+  .rev-card {
+    display: flex;
+    flex-direction: column;
+    flex-basis: calc((1688px - 72px) / 4);
+  }
+}
+
 /* =========================================================
    FOOTER
    ========================================================= */
-.footer { background: var(--teal); padding: 78px 0 90px; }
+.footer { background: var(--teal); padding: 76px 0 82px; }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 200px 150px 210px 200px 1fr;
-  gap: 24px;
+  grid-template-columns: minmax(190px, 1.35fr) minmax(115px, .8fr) minmax(160px, 1.05fr) minmax(130px, .85fr) minmax(220px, 1.35fr);
+  gap: 42px;
   align-items: start;
 }
 
-.footer-brand { grid-column: 1; grid-row: 1; margin-bottom: 22px; }
-.footer-brand img { height: 28px; display: block; }
+.footer-brand { grid-column: 1; grid-row: 1; margin-bottom: 24px; display: flex; flex-direction: column; align-items: flex-start; }
+.footer-brand img { height: 30px; display: block; }
+.footer-description { max-width: 190px; margin-top: 14px; font-size: 12px; line-height: 1.65; font-weight: 500; color: rgba(255, 255, 255, .72); }
 
-.footer-social { grid-column: 1; grid-row: 2; display: flex; gap: 14px; padding-top: 4px; }
+/* nested inside .footer-brand (moved there in js) so it sits right after
+   the text instead of in its own grid row */
+.footer-social { display: flex; gap: 10px; margin-top: 18px; }
 .footer-social a {
   width: 26px; height: 26px;
   display: flex; align-items: center; justify-content: center;
@@ -1007,31 +1245,205 @@ ul  { list-style: none; }
 }
 .footer-social a:hover { opacity: .7; }
 .footer-social svg { width: 20px; height: 20px; fill: #fff; }
+.footer-social a:not(:has(svg)) { color: #fff; font-size: 17px; font-weight: 700; }
+
+/* The older informational-page footers used text characters for these
+   marks. Render the same SVG icon set used by the rest of the site. */
+.about-page .footer-social a:not(:has(svg)),
+.contact-page .footer-social a:not(:has(svg)) { font-size: 0; }
+.about-page .footer-social a:not(:has(svg))::before,
+.contact-page .footer-social a:not(:has(svg))::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: center / contain no-repeat;
+}
+.about-page .footer-social a:nth-child(1)::before,
+.contact-page .footer-social a:nth-child(1)::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.25-1.5 1.55-1.5H16.7V4.6A21 21 0 0 0 14.3 4.5c-2.4 0-4 1.45-4 4.12v2.28H7.6V14h2.7v8Z'/%3E%3C/svg%3E"); }
+.about-page .footer-social a:nth-child(2)::before,
+.contact-page .footer-social a:nth-child(2)::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M22 5.9a8 8 0 0 1-2.36.65 4.1 4.1 0 0 0 1.8-2.27 8.2 8.2 0 0 1-2.6 1A4.1 4.1 0 0 0 11.8 9a11.6 11.6 0 0 1-8.44-4.3 4.1 4.1 0 0 0 1.27 5.5 4 4 0 0 1-1.86-.52 4.1 4.1 0 0 0 3.29 4.08 4.1 4.1 0 0 1-1.85.07 4.1 4.1 0 0 0 3.83 2.85A8.25 8.25 0 0 1 2 18.4a11.6 11.6 0 0 0 6.29 1.84c7.55 0 11.68-6.25 11.68-11.67v-.53A8.3 8.3 0 0 0 22 5.9Z'/%3E%3C/svg%3E"); }
+.about-page .footer-social a:nth-child(3)::before,
+.contact-page .footer-social a:nth-child(3)::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15.1V8.9l5.2 3.1Z'/%3E%3C/svg%3E"); }
+.about-page .footer-social a:nth-child(4)::before,
+.contact-page .footer-social a:nth-child(4)::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 2.9c3 0 3.3 0 4.5.07 1.1.05 1.7.23 2.1.39.5.2.9.45 1.3.85.4.4.65.8.85 1.3.16.4.34 1 .39 2.1.06 1.2.07 1.5.07 4.5s0 3.3-.07 4.5c-.05 1.1-.23 1.7-.39 2.1-.2.5-.45.9-.85 1.3-.4.4-.8.65-1.3.85-.4.16-1 .34-2.1.39-1.2.06-1.5.07-4.5.07s-3.3 0-4.5-.07c-1.1-.05-1.7-.23-2.1-.39a3.5 3.5 0 0 1-1.3-.85 3.5 3.5 0 0 1-.85-1.3c-.16-.4-.34-1-.39-2.1C2.9 15.3 2.9 15 2.9 12s0-3.3.07-4.5c.05-1.1.23-1.7.39-2.1.2-.5.45-.9.85-1.3.4-.4.8-.65 1.3-.85.4-.16 1-.34 2.1-.39C8.7 2.9 9 2.9 12 2.9Zm0 3.75A5.35 5.35 0 1 0 17.35 12 5.35 5.35 0 0 0 12 6.65Zm0 8.82A3.47 3.47 0 1 1 15.47 12 3.47 3.47 0 0 1 12 15.47Z'/%3E%3C/svg%3E"); }
 
 .footer-col h5 {
   font-size: 15px;
   font-weight: 600;
   color: #fff;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 .footer-col li {
   font-size: 12.5px;
   font-weight: 500;
-  line-height: 2.1;
+  line-height: 2.05;
   color: rgba(255, 255, 255, .82);
 }
-.footer-col a { transition: color .2s ease; }
-.footer-col a:hover { color: #fff; }
+.footer-col a {
+  display: inline-block;
+  transition: color .2s ease, transform .2s ease;
+}
+.footer-col a:hover,
+.footer-col a:focus-visible {
+  color: #9fe4dd;
+  transform: translateX(4px);
+  outline: none;
+}
 .footer-contact li { line-height: 1.95; }
+.footer-bottom { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: 20px; margin-top: 24px; padding-top: 21px; border-top: 1px solid rgba(255, 255, 255, .18); font-size: 11.5px; font-weight: 500; color: rgba(255, 255, 255, .65); }
+
+/* =========================================================
+   ABOUT PAGE
+   ========================================================= */
+.about-page { padding-top: 74px; }
+.about-page .nav-logo { margin-right: 56px; }
+.about-page .nav-logo .nav-logo-dark { display: block; }
+.about-page .nav-auth .nav-login { color: var(--ink); }
+.about-hero {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.about-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 42%; z-index: -2; }
+.about-hero-shade { position: absolute; inset: 0; background: rgba(12, 36, 43, .58); z-index: -1; }
+.about-hero-inner { max-width: 1384px; height: 100%; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; }
+.about-hero h1 { font-size: 42px; line-height: 1; font-weight: 700; color: #fff; }
+
+@media (min-width: 901px) {
+  .about-page .about-hero {
+    width: min(1512px, 100%);
+    height: 569px;
+    margin: 0 auto;
+  }
+}
+
+.about-story { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(300px, .94fr); gap: 72px; align-items: center; padding-top: 100px; padding-bottom: 104px; }
+.about-story-copy h2, .team h2 { font-size: 32px; line-height: 1.2; font-weight: 700; color: #102e3b; margin-bottom: 30px; }
+.about-story-copy p { font-size: 13px; font-weight: 500; line-height: 1.62; color: #5f6d77; margin-top: 20px; }
+.about-story-copy h2 + p { margin-top: 0; }
+.about-story-image { height: 384px; border-radius: 15px; overflow: hidden; }
+.about-story-image img { width: 100%; height: 100%; object-fit: cover; }
+
+@media (min-width: 901px) {
+  .about-story {
+    width: min(1352px, calc(100% - 48px));
+    max-width: 1352px;
+    margin-top: 96px;
+    padding: 0;
+  }
+  .about-story-image { height: 430px; }
+}
+
+.why-us { padding-bottom: 115px; }
+
+@media (min-width: 901px) {
+  .why-us {
+    width: min(1352px, calc(100% - 48px));
+    max-width: 1352px;
+    padding: 0 0 18px;
+  }
+}
+
+.about-section-head { text-align: center; }
+.about-section-head h2 { font-size: 31px; line-height: 1.2; font-weight: 700; color: #102e3b; }
+.about-section-head p, .team-heading p { margin-top: 5px; font-size: 12.5px; color: #78858d; }
+.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 42px; margin-top: 54px; }
+.why-grid article { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.why-icon { width: 108px; height: 108px; color: #4f9290; }
+.why-icon svg { width: 100%; height: 100%; display: block; }
+.why-icon .fill { fill: currentColor; }
+.why-icon .cut { fill: #fff; }
+.why-grid article p { margin-top: 27px; font-size: 20px; font-weight: 500; line-height: 1.28; color: #63727a; }
+.team { padding-bottom: 100px; }
+
+/* Desktop Figma frame: the content-driven team block is 1,352 × 452px. */
+@media (min-width: 901px) {
+  .team {
+    width: min(1352px, calc(100% - 48px));
+    max-width: 1352px;
+    padding: 0 0 26px;
+  }
+}
+.team-heading { margin-bottom: 47px; }
+.team-heading h2 { margin-bottom: 0; }
+.team-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 34px; }
+.team-grid img { width: 100%; height: 260px; object-fit: cover; object-position: center top; }
+.team-grid h3 { margin-top: 17px; font-size: 17px; font-weight: 700; color: #253d49; }
+.team-grid p { margin-top: 8px; font-size: 12.5px; font-weight: 500; color: #78858d; }
+.travel-types { display: grid; grid-template-columns: repeat(4, 1fr); gap: 64px; padding-bottom: 108px; }
+/* Separate the team names/roles from the icon row that follows. */
+.about-page .travel-types { margin-top: 64px; }
+.travel-types > div { display: flex; flex-direction: column; align-items: center; gap: 19px; color: #cdd3d5; }
+.travel-types svg { width: 120px; height: 120px; display: block; }
+.travel-types .travel-fill { fill: currentColor; }
+.travel-types .travel-cut { fill: #fff; }
+.travel-types span { font-size: 14px; font-weight: 500; color: #abb2b5; }
+.about-page .footer-social a { color: #fff; font-size: 18px; font-weight: 700; }
+
+/* Contact page */
+.contact-page { padding-top: 74px; }
+.contact-page .nav-logo .nav-logo-dark, .contact-page .nav-auth .nav-login { display: block; color: var(--ink); }
+.contact-main { min-height: 740px; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; padding-top: 125px; padding-bottom: 80px; max-width: 1040px; }
+.contact-form h1 { font-size: 34px; line-height: 1.2; color: #102e3b; }
+.contact-form > p { margin: 8px 0 38px; font-size: 14px; color: #60717b; }
+.contact-form input, .contact-form textarea { display: block; width: 100%; border: 0; outline: 0; border-radius: 8px; background: #edf2f3; color: var(--ink); font: 600 14px var(--font); padding: 0 18px; margin-top: 22px; }
+.contact-form input { height: 56px; }.contact-form textarea { height: 142px; padding-top: 18px; resize: vertical; }.contact-form ::placeholder { color: #82929a; opacity: 1; }
+.contact-form button { margin-top: 22px; width: 142px; height: 48px; border: 0; border-radius: 4px; color: #fff; background: #247477; font: 600 14px var(--font); cursor: pointer; }
+.contact-art { max-width: 440px; margin: 0 auto 35px; }.contact-art svg { display: block; width: 100%; height: auto; }
+.art-blob { fill: #4f8e8c; }.art-planet, .art-coral { fill: #fb7170; }.art-ring { fill: none; stroke: #fb7170; stroke-width: 2; }.art-dot { fill: #fff; }.art-pin { fill: #fff; }.art-cut { fill: #fb7170; }.art-paper { fill: #f8fbfb; }.art-glass, .art-handle { fill: none; stroke: #354d56; stroke-width: 5; stroke-linecap: round; }.art-person { fill: #344b55; }
+.contact-details { display: grid; gap: 24px; padding-left: 38px; }.contact-details li { display: flex; align-items: center; gap: 16px; font-size: 16px; color: #4e5e67; font-weight: 600; }.contact-details b { width: 42px; height: 42px; border: 1.5px solid #4f9290; border-radius: 50%; display: grid; place-items: center; color: #247477; font-size: 18px; }
+.contact-types { padding-top: 20px; padding-bottom: 300px; }.contact-types > div { color: #cfd5d7; }.contact-types .type-mark { display: grid; place-items: center; width: 104px; height: 104px; font-size: 88px; line-height: 1; color: #cfd5d7; }.contact-page .footer-social a { color: #fff; font-size: 18px; font-weight: 700; }
+@media (max-width: 800px) { .contact-main { grid-template-columns: 1fr; min-height: 0; padding-top: 85px; }.contact-info { width: 100%; }.contact-types { padding-bottom: 110px; } }
+@media (max-width: 620px) { .contact-main { gap: 55px; }.contact-details { padding-left: 0; }.contact-types { grid-template-columns: repeat(2, 1fr); gap: 45px 20px; }.contact-types .type-mark { width: 80px; height: 80px; font-size: 65px; } }
+
+@media (max-width: 700px) {
+  .footer { padding: 54px 0; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 34px 24px; }
+  .footer-brand { grid-column: 1 / -1; margin-bottom: 4px; }
+  .footer-col { min-width: 0; }
+  .footer-bottom { grid-column: 1 / -1; flex-direction: column; gap: 6px; margin-top: 0; }
+}
+
+@media (max-width: 900px) {
+  .about-hero { height: 390px; }
+  .about-story { grid-template-columns: 1fr; gap: 42px; padding-top: 72px; padding-bottom: 75px; }
+  .about-story-image { height: 390px; max-width: 560px; width: 100%; }
+  .why-grid { grid-template-columns: repeat(2, 1fr); row-gap: 54px; }
+  .team-grid { grid-template-columns: repeat(3, 1fr); }
+  .team-grid img { height: 250px; }
+}
+@media (max-width: 620px) {
+  .about-page { padding-top: 64px; }
+  .about-hero { height: 300px; }
+  .about-hero h1 { font-size: 35px; }
+  .about-story-copy h2, .team h2 { font-size: 28px; }
+  .about-story-image { height: 280px; }
+  .about-story-copy p { font-size: 12px; }
+  .why-us { padding-bottom: 80px; }
+  .why-grid { gap: 42px 20px; margin-top: 42px; }
+  .why-icon { width: 65px; height: 65px; }
+  .why-grid article p { margin-top: 18px; font-size: 14px; }
+  .team { padding-bottom: 75px; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 18px; }
+  .team-grid img { height: 210px; }
+  /* an odd last card centres on its own row instead of sitting orphaned left */
+  .team-grid article:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 9px);
+  }
+  .travel-types { grid-template-columns: repeat(2, 1fr); gap: 42px 24px; padding-bottom: 75px; }
+}
 
 /* =========================================================
    FLIGHTS PAGE — hero
    ========================================================= */
 .fhero {
   position: relative;
-  height: 560px;
-  margin: 0 24px;
-  margin-top: 98px; /* clears the always-solid fixed nav */
+  width: min(1452px, calc(100% - 48px));
+  height: 737px;
+  margin: 98px auto 0; /* clears the always-solid fixed nav */
   border-radius: 24px;
   overflow: hidden;
   isolation: isolate;
@@ -1044,50 +1456,20 @@ ul  { list-style: none; }
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: 100% -25%; /* plane sits upper-right; the headline
-    naturally reads over it like the reference, with the white search
-    bar occluding where the wingtip would otherwise reach it */
+  object-position: center; /* the artwork is already composed for this
+    frame — plane centred, runway bokeh along the bottom edge */
   z-index: -3;
 }
-/* dusk tint: cool blue at top (deepens the sky), warming toward an amber
-   glow near the bottom to suggest horizon light, darkening at the very
-   edge for text contrast and to ground the bokeh circles */
+/* the dusk gradient and the out-of-focus runway lights are part of the
+   photograph itself, so only a light scrim is layered here to hold the
+   headline's contrast */
 .fhero-shade {
   position: absolute; inset: 0;
   background: linear-gradient(180deg,
-    rgba(15, 35, 65, .30) 0%,
-    rgba(25, 45, 75, .08) 30%,
-    rgba(70, 55, 35, .10) 60%,
-    rgba(140, 90, 40, .30) 82%,
-    rgba(15, 10, 8, .62) 100%);
+    rgba(10, 25, 45, .18) 0%,
+    rgba(10, 25, 45, .06) 45%,
+    rgba(10, 15, 25, .12) 100%);
   z-index: -2;
-}
-/* constructed bokeh — soft blurred warm circles standing in for
-   out-of-focus runway/city lights along the bottom edge */
-.fhero-bokeh {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 130px;
-  filter: blur(7px);
-  opacity: .9;
-  z-index: -1;
-  background-image:
-    radial-gradient(circle at 3% 88%,  rgba(255, 225, 170, .95) 0%, rgba(255, 225, 170, 0) 9%),
-    radial-gradient(circle at 9% 70%,  rgba(255, 195, 120, .85) 0%, rgba(255, 195, 120, 0) 7%),
-    radial-gradient(circle at 15% 92%, rgba(255, 235, 190, .9)  0%, rgba(255, 235, 190, 0) 8%),
-    radial-gradient(circle at 21% 65%, rgba(255, 170, 90, .8)   0%, rgba(255, 170, 90, 0) 6%),
-    radial-gradient(circle at 27% 85%, rgba(255, 210, 140, .9) 0%, rgba(255, 210, 140, 0) 8%),
-    radial-gradient(circle at 34% 72%, rgba(255, 150, 80, .75)  0%, rgba(255, 150, 80, 0) 6%),
-    radial-gradient(circle at 40% 90%, rgba(255, 225, 170, .9) 0%, rgba(255, 225, 170, 0) 9%),
-    radial-gradient(circle at 47% 68%, rgba(255, 190, 110, .8)  0%, rgba(255, 190, 110, 0) 6%),
-    radial-gradient(circle at 53% 88%, rgba(255, 205, 140, .9) 0%, rgba(255, 205, 140, 0) 8%),
-    radial-gradient(circle at 60% 74%, rgba(255, 160, 90, .75)  0%, rgba(255, 160, 90, 0) 6%),
-    radial-gradient(circle at 66% 92%, rgba(255, 230, 180, .9) 0%, rgba(255, 230, 180, 0) 9%),
-    radial-gradient(circle at 72% 66%, rgba(255, 175, 95, .8)   0%, rgba(255, 175, 95, 0) 6%),
-    radial-gradient(circle at 79% 86%, rgba(255, 210, 150, .9) 0%, rgba(255, 210, 150, 0) 8%),
-    radial-gradient(circle at 85% 70%, rgba(255, 150, 80, .75)  0%, rgba(255, 150, 80, 0) 6%),
-    radial-gradient(circle at 91% 90%, rgba(255, 225, 170, .9) 0%, rgba(255, 225, 170, 0) 8%),
-    radial-gradient(circle at 97% 78%, rgba(255, 180, 110, .8)  0%, rgba(255, 180, 110, 0) 6%);
 }
 .fhero-content { text-align: center; padding: 0 24px; }
 .fhero-title {
@@ -1109,6 +1491,13 @@ ul  { list-style: none; }
   margin-top: 40px;
 }
 
+@media (min-width: 901px) {
+  .hotels-page .fhero {
+    width: min(1512px, calc(100% - 48px));
+    height: 956.23px;
+  }
+}
+
 /* =========================================================
    FLIGHTS PAGE — destination price grid
    ========================================================= */
@@ -1121,6 +1510,12 @@ ul  { list-style: none; }
   height: 260px;
   border-radius: 16px;
   overflow: hidden;
+}
+
+@media (min-width: 1101px) {
+  /* 1352px usable content width; the two grid rows naturally hug to 994px. */
+  .fdest-section > .container { max-width: 1400px; }
+  .fdest-img { height: 288px; }
 }
 .fdest-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
 .fdest-card:hover .fdest-img img { transform: scale(1.05); }
@@ -1162,6 +1557,15 @@ ul  { list-style: none; }
 .kayak-section { padding: 0 0 100px; }
 
 .kayak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+
+@media (min-width: 1101px) {
+  /* Keep clear breathing room before the footer; the photo grid can grow
+     with its content, so removing this space lets it visually run into the
+     footer at some viewport sizes and zoom levels. */
+  .kayak-section { padding-bottom: 100px; }
+  .kayak-section > .container { max-width: 1400px; }
+  .kayak-grid { height: 431px; }
+}
 
 .kayak-feature {
   position: relative;
@@ -1283,31 +1687,44 @@ ul  { list-style: none; }
 .deals-tab:hover { color: var(--ink-soft); }
 .deals-tab.is-active { color: var(--accent); font-weight: 700; border-color: var(--accent); }
 
-.deals-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.deals-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 312px);
+  justify-content: center;
+  gap: 24px;
+}
+.deal-card {
+  width: 312px; height: 479px;
+  display: flex; flex-direction: column;
+  background: #fff; border-radius: 16px; overflow: hidden;
+}
 
-.deal-img { position: relative; height: 190px; border-radius: 16px; overflow: hidden; }
+.deal-img { height: 289px; flex: none; border-radius: 16px 16px 0 0; overflow: hidden; }
 .deal-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
 .deal-card:hover .deal-img img { transform: scale(1.06); }
+.deal-top { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px 0; }
 .deal-loc {
-  position: absolute; left: 12px; top: 12px;
   display: flex; align-items: center; gap: 4px;
-  background: rgba(10, 20, 20, .5); backdrop-filter: blur(2px);
-  color: #fff; font-size: 10.5px; font-weight: 500;
-  padding: 5px 10px; border-radius: 999px;
+  color: #2b7274; font-size: 13px; font-weight: 500;
 }
-.deal-loc .ic-pin { width: 11px; height: 11px; stroke: #fff; }
+.deal-loc .ic-pin { width: 16px; height: 16px; fill: #2b7274; stroke: #2b7274; }
 .deal-rating {
-  position: absolute; right: 12px; top: 12px;
-  background: #fff; color: var(--ink);
-  font-size: 11px; font-weight: 700;
-  padding: 5px 9px; border-radius: 999px;
+  color: #ffc400; font-size: 17px; line-height: 1; font-weight: 700;
 }
+.deal-rating b { color: #4e4e4e; font-size: 16px; font-weight: 500; margin-left: 3px; vertical-align: 1px; }
+.deal-card:nth-child(2) .deal-loc, .deal-card:nth-child(2) .deal-loc .ic-pin,
+.deal-card:nth-child(6) .deal-loc, .deal-card:nth-child(6) .deal-loc .ic-pin { color: #fb9318; fill: #fb9318; stroke: #fb9318; }
+.deal-card:nth-child(3) .deal-loc, .deal-card:nth-child(3) .deal-loc .ic-pin,
+.deal-card:nth-child(8) .deal-loc, .deal-card:nth-child(8) .deal-loc .ic-pin { color: #fa7181; fill: #fa7181; stroke: #fa7181; }
+.deal-card:nth-child(4) .deal-loc, .deal-card:nth-child(4) .deal-loc .ic-pin,
+.deal-card:nth-child(5) .deal-loc, .deal-card:nth-child(5) .deal-loc .ic-pin,
+.deal-card:nth-child(7) .deal-loc, .deal-card:nth-child(7) .deal-loc .ic-pin { color: #6ebdf0; fill: #6ebdf0; stroke: #6ebdf0; }
 
-.deal-name { margin-top: 14px; font-size: 15px; font-weight: 700; color: var(--ink); }
-.deal-sub { margin-top: 3px; font-size: 11.5px; font-weight: 500; color: var(--muted-light); }
-.deal-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
-.deal-price { font-size: 16px; font-weight: 700; color: var(--accent); }
-.deal-more { font-size: 11.5px; font-weight: 600; color: var(--ink-soft); transition: color .2s ease; }
+.deal-name { margin-top: 17px; padding: 0 24px; font-size: 22px; line-height: 1.15; font-weight: 700; color: var(--ink); }
+.deal-sub { margin-top: 11px; padding: 0 24px; font-size: 12px; font-weight: 500; color: var(--muted-light); }
+.deal-meta { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding: 0 24px 24px; }
+.deal-price { font-size: 28px; font-weight: 500; color: #2b7274; }
+.deal-more { font-size: 14px; font-weight: 500; color: var(--muted-light); transition: color .2s ease; }
 .deal-more:hover { color: var(--accent); }
 
 .deals-viewall { display: flex; justify-content: center; margin-top: 42px; }
@@ -1318,6 +1735,12 @@ ul  { list-style: none; }
    ========================================================= */
 .th-section { padding: 100px 0; }
 .th-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+
+@media (min-width: 1101px) {
+  .th-section > .container { max-width: 1400px; }
+  .th-grid { height: 418px; }
+  .th-section .th-feature { min-height: 0; }
+}
 
 .th-feature {
   position: relative;
@@ -1453,6 +1876,22 @@ ul  { list-style: none; }
   padding: 7px 16px; border-radius: 999px;
 }
 
+/* the reference artwork bakes the label, location and "View more" pill into
+   the image itself, so the HTML overlay is hidden (kept for screen readers)
+   and the whole card becomes one link */
+.otherdest-card--art {
+  display: block;
+  /* the artwork's native 523x255 — keeping the ratio stops `cover` from
+     cropping the baked-in label off the top and bottom */
+  height: auto; aspect-ratio: 523 / 255;
+  background-size: 100% 100%;
+}
+.otherdest-card--art::before { display: none; }
+.otherdest-card--art .otherdest-info {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
 /* ---- hotel listings ---- */
 .hlist-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
 .hlist-tab {
@@ -1549,24 +1988,30 @@ ul  { list-style: none; }
    ========================================================= */
 .dhero {
   position: relative;
-  height: 410px;
   margin-top: 74px; /* clears the fixed nav */
+}
+/* the artwork already contains the heading + overlay, so the image shows
+   at its native aspect ratio, uncropped, exactly as designed */
+.dhero img { width: 100%; height: auto; display: block; }
+
+@media (min-width: 901px) {
+  .dhero {
+    width: min(1512px, 100%);
+    height: 569px;
+    margin: 74px auto 0;
+    overflow: hidden;
+  }
+  .dhero img { height: 100%; object-fit: cover; }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
   overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-}
-.dhero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.dhero-shade {
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(10, 20, 20, .1) 0%, rgba(10, 20, 20, .1) 55%, rgba(10, 20, 20, .5) 100%);
-}
-.dhero-title {
-  position: relative;
-  z-index: 1;
-  padding: 0 0 46px 64px;
-  font-size: 40px;
-  font-weight: 700;
-  color: #fff;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .discover-section { padding: 70px 0 100px; }
@@ -1592,7 +2037,9 @@ ul  { list-style: none; }
 .discover-img-pair img { width: 100%; height: 230px; object-fit: cover; border-radius: 16px; display: block; }
 
 .discover-sidebar { display: flex; flex-direction: column; gap: 32px; position: sticky; top: 100px; }
-.discover-map { border-radius: 16px; overflow: hidden; background: #cfe9f5; padding: 18px; }
+/* the map artwork already carries its own rounded blue panel, so no extra
+   background or padding here — that produced a doubled frame */
+.discover-map { margin-bottom: 26px; }
 .discover-map img { width: 100%; display: block; }
 
 /* =========================================================
@@ -1612,11 +2059,12 @@ ul  { list-style: none; }
   .happy-grid { grid-template-columns: 1fr; }
   .promo { height: 460px; }
   .footer-grid { grid-template-columns: 1fr 1fr 1fr; row-gap: 44px; }
-  .footer-social { grid-column: 1 / -1; }
   .fdest-grid { grid-template-columns: repeat(2, 1fr); }
   .rs-row { grid-template-columns: repeat(2, 1fr); }
-  .deals-grid { grid-template-columns: repeat(2, 1fr); }
-  .listings-layout { grid-template-columns: 1fr; }
+  .deals-grid { grid-template-columns: repeat(2, minmax(0, 312px)); }
+  .deal-card { width: 100%; }
+  .listings-layout { grid-template-columns: minmax(0, 1fr); }
+  .filters-col, .hlist-col { min-width: 0; }
   .filters-col { position: static; }
   .pkg-row { grid-template-columns: 1fr; }
   .discover-layout { grid-template-columns: 1fr; }
@@ -1638,18 +2086,41 @@ ul  { list-style: none; }
     border-radius: 0 0 16px 16px;
     transition: max-height .35s ease;
   }
-  .nav.is-open .nav-menu { max-height: 420px; }
+  .nav.is-open .nav-menu { max-height: min(80vh, 640px); overflow-y: auto; }
   .nav-links {
     position: static; left: auto; transform: none; /* cancel desktop centring */
-    flex-direction: column; align-items: flex-start; gap: 0; padding: 18px 28px 6px; width: 100%;
+    flex-direction: column; align-items: stretch; gap: 0; padding: 8px 24px 0; width: 100%;
   }
-  .nav-links a { width: 100%; padding: 10px 0; color: var(--ink-soft) !important; font-weight: 500; }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block; width: 100%;
+    padding: 13px 2px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-soft) !important;
+    font-size: 15px; font-weight: 600;
+  }
+  .nav-links li:last-child a { border-bottom: 0; }
   .nav-links a.active, .nav-links a:hover { color: var(--accent) !important; }
-  .nav-auth { flex-direction: column; align-items: stretch; gap: 12px; padding: 10px 28px 24px; margin-left: 0; }
-  .nav-login { color: var(--ink) !important; }
-  .nav-auth .btn-signup { text-align: center; background: var(--teal-deep) !important; color: #fff !important; }
+  .nav-auth {
+    flex-direction: column; align-items: stretch; gap: 12px;
+    margin: 0 24px; padding: 16px 0 22px;
+    border-top: 1px solid var(--line);
+  }
+  .nav-login {
+    display: block; text-align: center;
+    padding: 10px; border: 1.5px solid var(--teal-deep); border-radius: 999px;
+    color: var(--teal-deep) !important; font-weight: 600;
+  }
+  .nav-auth .btn-signup {
+    text-align: center; padding: 11px 24px;
+    background: var(--teal-deep) !important; color: #fff !important;
+  }
 
-  .nav-user { flex-direction: column; align-items: stretch; gap: 14px; padding: 10px 28px 24px; width: 100%; margin-left: 0; }
+  .nav-user {
+    flex-direction: column; align-items: stretch; gap: 14px;
+    margin: 0 24px; padding: 16px 0 22px; width: auto;
+    border-top: 1px solid var(--line);
+  }
   .nav-user-div { display: none; }
   .account-panel {
     position: static; display: none;
@@ -1658,7 +2129,10 @@ ul  { list-style: none; }
   }
   .nav-user.is-open .account-panel { display: block; }
 
-  .fhero { margin: 0 16px; margin-top: 90px; height: 500px; }
+  /* below this width the artwork's wide ratio would make the hero too
+     short for the headline + search bar, so fall back to a fixed height
+     and let `cover` crop the sides */
+  .fhero { width: auto; margin: 0 16px; margin-top: 90px; aspect-ratio: auto; height: 500px; }
   .fhero-title { font-size: 32px; }
   .fdest-grid { grid-template-columns: repeat(2, 1fr); }
   .kayak-grid, .th-grid { grid-template-columns: 1fr; }
@@ -1687,6 +2161,7 @@ ul  { list-style: none; }
   .search-field { flex: 1 1 45%; }
   .search-div { display: none; }
   .btn-find { width: 100%; justify-content: center; }
+  .search-field { position: static; }
   /* dropdown panels re-centre under the whole bar so they can never
      push past the viewport edge regardless of which field opened them */
   .ac-panel, .date-panel, .traveler-panel {
@@ -1720,24 +2195,852 @@ ul  { list-style: none; }
   .fdest-grid { grid-template-columns: 1fr; }
   .kayak-photos, .th-photos { grid-template-columns: 1fr 1fr; height: 320px; }
   .rs-row { grid-template-columns: 1fr; }
-  .deals-grid { grid-template-columns: 1fr; }
+  .deals-grid { grid-template-columns: minmax(0, 312px); }
   .deals-head { gap: 10px; }
   .deals-plane { display: none; }
   .hlist-top { flex-direction: column; }
+  .hlist-tabs, .hlist-toolbar { flex-wrap: wrap; row-gap: 10px; }
   .hlist-price { text-align: left; margin-top: 10px; }
   .filter-field { flex: 1 1 100%; }
-  .dhero { height: 300px; }
-  .dhero-title { font-size: 30px; padding: 0 0 30px 24px; }
   .discover-img-pair { grid-template-columns: 1fr; }
   .discover-article h2 { font-size: 26px; }
 }
 
 /* the visual block keeps its exact Figma proportions and scales as a unit */
 @media (max-width: 660px) {
-  .about-visual-wrap { width: 367px; height: 276px; }
+  .about-visual-wrap { width: 359px; height: 278px; }
   .about-visual { transform: scale(.62); transform-origin: top left; }
 }
+/* 320px is the narrowest supported viewport: 320 - 48px container padding
+   leaves 272px, so the scaled block must stay under that */
 @media (max-width: 420px) {
-  .about-visual-wrap { width: 284px; height: 214px; }
-  .about-visual { transform: scale(.48); }
+  .about-visual-wrap { width: 266px; height: 206px; }
+  .about-visual { transform: scale(.46); }
+}
+
+/* Footer layout takes priority over page-specific responsive rules. */
+@media (max-width: 700px) {
+  .footer { padding: 54px 0; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 34px 24px; }
+  .footer-brand { grid-column: 1 / -1; margin-bottom: 4px; }
+  .footer-col { min-width: 0; }
+}
+
+/* =========================================================
+   LOGIN PAGE
+   Geometry + colours measured directly off the Figma export
+   (Login.png, 1512x982): card 627x848 at x=805,y=67 (radius 28);
+   content column 512px wide (x 863..1374); inputs 54px tall;
+   Login button 48px; social buttons 160x48 with 17px gaps.
+   ========================================================= */
+.login-page {
+  min-height: 100vh;
+  background: url('../assets/images/login-bg.webp') center / cover no-repeat;
+}
+
+.login-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* card sits 81px from the right edge of the 1512px canvas */
+  padding: 67px 81px;
+}
+
+.login-card {
+  width: 627px;
+  max-width: 100%;
+  background: #fff;
+  border-radius: 28px;
+  padding: 66px 58px 84px;
+  box-shadow: 0 18px 60px rgba(8, 20, 28, .18);
+}
+
+.login-title {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #051721;
+  letter-spacing: -.5px;
+}
+.login-sub {
+  margin-top: 18px;
+  line-height: 15px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #69747A;
+}
+
+.login-form { margin-top: 52px; }
+
+/* --- notched-outline fields: the label sits on the border line --- */
+.lg-field {
+  position: relative;
+  margin-bottom: 28px;
+}
+.lg-label {
+  position: absolute;
+  top: -8px;
+  left: 13px;
+  padding: 0 5px;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  color: #051721;
+  line-height: 1;
+}
+.lg-input {
+  width: 100%;
+  height: 54px;
+  padding: 0 46px 0 17px;
+  border: 1px solid #9BA2A6;
+  border-radius: 4px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  color: #051721;
+  outline: none;
+  transition: border-color .18s ease;
+}
+.lg-input::placeholder { color: #69747A; }
+.lg-input:focus { border-color: #276968; }
+
+.lg-eye {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px; height: 26px;
+  display: grid; place-items: center;
+  border: 0; background: none; padding: 0;
+  cursor: pointer;
+}
+.lg-eye svg {
+  width: 21px; height: 21px;
+  fill: none;
+  stroke: #4B5459;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* --- remember me / forgot password --- */
+.lg-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 8px;
+}
+.lg-check {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #37454D;
+  cursor: pointer;
+}
+.lg-check input { position: absolute; opacity: 0; width: 0; height: 0; }
+.lg-box {
+  width: 20px; height: 20px;
+  border: 1.6px solid #9BA2A6;
+  border-radius: 3px;
+  flex: none;
+  position: relative;
+  transition: background .15s ease, border-color .15s ease;
+}
+.lg-check input:checked + .lg-box {
+  background: #276968;
+  border-color: #276968;
+}
+.lg-check input:checked + .lg-box::after {
+  content: '';
+  position: absolute;
+  left: 6px; top: 2px;
+  width: 5px; height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.lg-check input:focus-visible + .lg-box { outline: 2px solid #276968; outline-offset: 2px; }
+
+.lg-forgot {
+  font-size: 14px;
+  font-weight: 500;
+  color: #FF6F6B;
+}
+.lg-forgot:hover { text-decoration: underline; }
+
+/* --- primary action --- */
+.lg-submit {
+  width: 100%;
+  height: 48px;
+  margin-top: 35px;
+  border: 0;
+  border-radius: 4px;
+  background: #276968;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: background .18s ease;
+}
+.lg-submit:hover { background: #1f5857; }
+
+.lg-signup {
+  margin-top: 21px;
+  line-height: 14px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #051721;
+}
+.lg-signup a { color: #FF6F6B; font-weight: 500; }
+.lg-signup a:hover { text-decoration: underline; }
+
+/* --- divider --- */
+.lg-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 35px;
+}
+.lg-divider::before,
+.lg-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #EFF0F1;
+}
+.lg-divider span {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 14px;
+  color: #828B90;
+}
+
+/* --- social row: three equal 160px buttons --- */
+.lg-social {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
+  margin-top: 32px;
+}
+.lg-social-btn {
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #E2EEFE;
+  border-radius: 4px;
+  background: #fff;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+.lg-social-btn:hover {
+  border-color: #c9ddf6;
+  box-shadow: 0 2px 10px rgba(18, 21, 26, .06);
+}
+.lg-social-btn svg { width: 23px; height: 23px; display: block; }
+
+@media (max-width: 1100px) {
+  .login-shell { justify-content: center; padding: 48px 32px; }
+}
+@media (max-width: 700px) {
+  .login-shell { padding: 32px 18px; }
+  .login-card { padding: 44px 26px 40px; border-radius: 22px; }
+  .login-title { font-size: 32px; }
+  .lg-social { gap: 12px; }
+}
+
+/* ---------------------------------------------------------
+   SIGN UP — shares the login card shell (same 627x848 box at
+   the same position); only the denser field stack differs.
+   Measured off Sign Up.png: fields repeat on an 80px rhythm
+   (193 / 273 / 353 / 433 from card top); email + phone split
+   243px | 24px gap | 243px; agree row at 520; button at 574;
+   "Already..." 642; divider 690; social 735.
+   --------------------------------------------------------- */
+.login-card--signup { padding-bottom: 15px; }
+
+/* the heading block sits 2px tighter than on the login screen */
+.login-card--signup .login-title { margin-top: -2px; }
+.login-card--signup .login-sub { margin-top: 19px; }
+.login-card--signup .login-form { margin-top: 51px; }
+
+/* 80px rhythm: 54px input + 26px gap */
+.login-card--signup .lg-field { margin-bottom: 12px; }
+
+/* email + phone share one row */
+.lg-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.lg-pair .lg-field { margin-bottom: 12px; }
+
+/* the agree row is a single full-width line, not a split row */
+.lg-row--agree { margin-top: 1px; }
+.lg-row--agree .lg-check { align-items: flex-start; }
+.lg-row--agree .lg-box { margin-top: -1px; }
+.lg-row--agree a { color: #FF6F6B; }
+.lg-row--agree a:hover { text-decoration: underline; }
+
+.login-card--signup .lg-submit { margin-top: 30px; }
+.login-card--signup .lg-signup { margin-top: 20px; }
+.login-card--signup .lg-divider { margin-top: 34px; }
+.login-card--signup .lg-social { margin-top: 27px; }
+
+@media (max-width: 560px) {
+  .lg-pair { grid-template-columns: 1fr; gap: 0; }
+}
+
+/* --- Stackly mark above the card heading -----------------
+   Not present in the Figma exports; added on request. The
+   card keeps its exact 627x848 box: the logo occupies part
+   of the generous bottom padding, and the top padding is
+   reduced by the logo's own height + gap so the heading and
+   every row below it stay on their measured positions.      */
+.login-logo {
+  display: block;
+  width: max-content;
+  margin-bottom: 26px;
+}
+.login-logo img { height: 30px; display: block; }
+
+/* --- Select Role -----------------------------------------
+   Added on request (not in the Figma exports). Reuses the
+   .lg-input box exactly — same 54px height, border, radius
+   and notched label — with the native arrow swapped for a
+   chevron so it renders identically across browsers.        */
+.lg-field--select { position: relative; }
+
+.lg-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 44px;
+  cursor: pointer;
+  color: #051721;
+}
+/* the native listbox inherits the page font on most platforms */
+.lg-select option { font-family: inherit; color: #051721; }
+
+.lg-caret {
+  position: absolute;
+  right: 17px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 19px; height: 19px;
+  fill: none;
+  stroke: #4B5459;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+/* =========================================================
+   DASHBOARD — the page login lands on. No Figma export for
+   this screen; it is composed from the site's own design
+   language (teal band, existing card components, Quicksand).
+   ========================================================= */
+.dash-hero {
+  margin-top: 74px; /* clears the fixed solid nav */
+  background: linear-gradient(120deg, var(--teal-deep) 0%, var(--teal) 62%, #1e7d78 100%);
+  padding: 58px 0 54px;
+  color: #fff;
+}
+.dash-hero-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.dash-chip {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .16);
+  border: 1px solid rgba(255, 255, 255, .35);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .4px;
+}
+.dash-welcome h1 {
+  margin-top: 14px;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -.3px;
+}
+.dash-welcome p {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, .82);
+}
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(110px, 1fr));
+  gap: 14px;
+}
+.dash-stat {
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 16px;
+  padding: 16px 18px;
+  text-align: center;
+}
+.dash-stat strong { display: block; font-size: 22px; font-weight: 700; }
+.dash-stat span { display: block; margin-top: 4px; font-size: 11.5px; font-weight: 500; color: rgba(255, 255, 255, .78); }
+
+.dash-trip-section { padding-top: 46px; }
+.dash-trip {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.dash-trip-media { position: relative; min-height: 250px; }
+.dash-trip-media img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.dash-trip-body { padding: 28px 32px; }
+.dash-trip-status {
+  display: inline-block;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: #e8f4ef;
+  color: var(--accent);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+.dash-trip-body h3 { margin-top: 12px; font-size: 23px; font-weight: 700; color: var(--ink); }
+.dash-trip-dates {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 10px;
+  font-size: 13.5px; font-weight: 600; color: var(--ink-soft);
+}
+.dash-trip-dates .ic-pin { width: 15px; height: 15px; fill: none; stroke: var(--accent); stroke-width: 1.8; }
+.dash-trip-note { margin-top: 8px; font-size: 12.5px; font-weight: 500; color: var(--muted); }
+.dash-trip-actions { display: flex; align-items: center; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
+.dash-trip-btn {
+  width: auto; height: auto;
+  margin-top: 0;
+  padding: 12px 26px;
+  display: inline-block;
+  border-radius: 999px;
+  font-size: 13px;
+}
+.dash-reco { padding-bottom: 74px; }
+
+@media (max-width: 1100px) {
+  .dash-stats { grid-template-columns: repeat(2, minmax(130px, 1fr)); }
+  .dash-trip { grid-template-columns: 1fr; }
+  .dash-trip-media { min-height: 220px; }
+}
+@media (max-width: 600px) {
+  .dash-welcome h1 { font-size: 27px; }
+  .dash-stats { grid-template-columns: 1fr 1fr; width: 100%; }
+}
+
+/* invalid state for the auth forms */
+.lg-input.is-invalid { border-color: #FF6F6B; }
+
+/* =========================================================
+   DASHBOARD SHELL — app layout: fixed sidebar menu + topbar.
+   Content blocks reuse the site's existing card components.
+   ========================================================= */
+.db-body { background: #f5f7f8; }
+
+.db-sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 256px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px 24px;
+  background: linear-gradient(175deg, var(--teal-deep) 0%, var(--teal) 90%);
+  z-index: 60;
+}
+.db-logo { display: block; padding: 0 10px; }
+.db-logo img { height: 30px; }
+
+.db-menu { display: flex; flex-direction: column; gap: 6px; margin-top: 44px; }
+.db-link {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 12px 15px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .76);
+  transition: background .16s ease, color .16s ease;
+}
+.db-link svg {
+  width: 20px; height: 20px; flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.db-link:hover { background: rgba(255, 255, 255, .1); color: #fff; }
+.db-link.is-active { background: rgba(255, 255, 255, .16); color: #fff; }
+
+.db-logout {
+  margin-top: auto;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+}
+
+.db-main { margin-left: 256px; min-height: 100vh; padding-top: 72px; }
+
+.db-topbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 256px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 72px;
+  padding: 0 36px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 2px 12px rgba(18, 45, 57, .04);
+}
+.db-page-title { font-size: 20px; font-weight: 700; color: var(--ink); }
+.db-user { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.db-user-name { font-size: 14px; font-weight: 600; color: var(--ink); }
+
+.db-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px; height: 40px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+}
+.db-burger span { display: block; height: 2px; border-radius: 2px; background: var(--ink); }
+
+.db-content { max-width: 1240px; padding: 34px 36px 28px; }
+
+/* the welcome band becomes a rounded card inside the content column */
+.db-band { margin-top: 0; border-radius: 20px; padding: 42px 38px; }
+
+.db-section { margin-top: 42px; }
+.db-sec-head { margin-bottom: 22px; }
+
+/* Dashboard recommendation cards use the available app-content width instead
+   of the fixed 312px hotel-listing card width. This prevents the four cards
+   from overflowing behind the fixed sidebar. */
+.db-section .deals-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  justify-content: start;
+  gap: 18px;
+}
+.db-section .deal-card {
+  width: 100%;
+  height: 440px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.db-section .deal-img { position: relative; height: 250px; }
+.db-section .deal-loc {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .94);
+  font-size: 11px;
+  box-shadow: 0 2px 8px rgba(12, 36, 43, .12);
+}
+.db-section .deal-loc .ic-pin { width: 13px; height: 13px; }
+.db-section .deal-rating {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .94);
+  font-size: 12px;
+  box-shadow: 0 2px 8px rgba(12, 36, 43, .12);
+}
+.db-section .deal-name { margin-top: 15px; padding: 0 18px; font-size: 18px; }
+.db-section .deal-sub { margin-top: 8px; padding: 0 18px; }
+.db-section .deal-meta { padding: 0 18px 18px; }
+.db-foot {
+  margin-top: 52px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+@media (max-width: 1000px) {
+  .db-sidebar { transform: translateX(-102%); transition: transform .25s ease; box-shadow: none; }
+  .db-sidebar.is-open { transform: none; box-shadow: 0 0 60px rgba(10, 25, 25, .35); }
+  .db-main { margin-left: 0; }
+  .db-burger { display: flex; }
+  .db-topbar { left: 0; padding: 0 20px; }
+  .db-content { padding: 26px 20px 24px; }
+  .db-band { padding: 32px 24px; }
+}
+
+@media (max-width: 1100px) {
+  .db-section .deals-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .db-section .deals-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 500px) {
+  .db-section .deals-grid { grid-template-columns: 1fr; }
+  .db-section .deal-card { height: 420px; }
+}
+
+/* --- dashboard sub-pages ------------------------------- */
+.db-lede { font-size: 13.5px; font-weight: 500; color: var(--muted); margin-bottom: 22px; }
+
+/* My Trips list */
+.trip-card {
+  display: grid;
+  grid-template-columns: 230px 1fr auto;
+  gap: 26px;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-sm);
+}
+.trip-media { position: relative; min-height: 150px; height: 100%; }
+.trip-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.trip-body { padding: 20px 0; }
+.trip-body h3 { font-size: 18px; font-weight: 700; color: var(--ink); }
+.trip-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 20px 26px 20px 0;
+}
+.trip-price { font-size: 17px; font-weight: 700; color: var(--teal); }
+.trip-status--pending { background: #fdf1e2; color: #c07817; }
+.trip-status--done { background: #eef0f3; color: var(--muted); }
+.trip-card--past .trip-media img { filter: saturate(.75); }
+
+/* Favourites grid: heart chip on each card */
+.fav-heart {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 34px; height: 34px;
+  display: grid; place-items: center;
+  border: 0; border-radius: 50%;
+  background: rgba(255, 255, 255, .92);
+  cursor: pointer;
+  transition: transform .15s ease;
+}
+.fav-heart:hover { transform: scale(1.08); }
+.fav-heart svg { width: 18px; height: 18px; fill: none; stroke: var(--muted); stroke-width: 1.8; }
+.fav-heart.is-on svg { fill: #ff5757; stroke: #ff5757; }
+
+/* Settings card */
+.settings-card {
+  max-width: 640px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 34px 36px 36px;
+  box-shadow: var(--shadow-sm);
+}
+.settings-card h2 { font-size: 21px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.settings-card .lg-field { margin-bottom: 26px; }
+.settings-card .lg-pair .lg-field { margin-bottom: 26px; }
+.settings-actions { display: flex; align-items: center; gap: 16px; margin-top: 4px; }
+.settings-save { width: auto; height: 46px; margin-top: 0; padding: 0 28px; border-radius: 8px; }
+.settings-saved { font-size: 13.5px; font-weight: 700; color: var(--accent); }
+
+@media (max-width: 760px) {
+  .trip-card { grid-template-columns: 1fr; gap: 0; }
+  .trip-media { min-height: 170px; }
+  .trip-body { padding: 18px 20px 0; }
+  .trip-side { flex-direction: row; align-items: center; padding: 16px 20px 20px; }
+  .trip-side .btn-outline { margin-left: auto; }
+}
+
+/* --- identity: email + role in the welcome band and topbar --- */
+.dash-id {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .92);
+}
+.dash-id svg {
+  width: 16px; height: 16px;
+  fill: none;
+  stroke: rgba(255, 255, 255, .85);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.dash-id-sep { color: rgba(255, 255, 255, .55); }
+
+.db-user-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.3;
+}
+.db-user-email { font-size: 11.5px; font-weight: 500; color: var(--muted); }
+.db-user-role {
+  margin-top: 3px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: #e8f4ef;
+  color: var(--accent);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+@media (max-width: 600px) {
+  .db-user-email { display: none; }
+  .dash-id { flex-wrap: wrap; }
+}
+
+/* --- book-a-flight / book-a-hotel forms ------------------ */
+.book-card { max-width: 720px; }
+.book-cta {
+  display: inline-block;
+  text-align: center;
+  line-height: 46px;
+}
+
+/* =========================================================
+   SMALL-PHONE FINISHING PASS
+   These shared rules keep every page usable from 320px upwards while
+   preserving the existing tablet and desktop compositions.
+   ========================================================= */
+@media (max-width: 600px) {
+  html, body { overflow-x: hidden; }
+  .container { padding-left: 18px; padding-right: 18px; }
+
+  /* Home */
+  .nav { top: 12px; height: 62px; padding: 0 18px; }
+  .nav.nav--solid { top: 0; }
+  .nav-logo, .nav-logo img { height: 25px; }
+  .hero { width: calc(100% - 24px); margin: 12px auto 0; border-radius: 16px; }
+  .hero-content { margin-top: 108px; padding: 0 18px; }
+  .hero-title { font-size: 29px; }
+  .hero-sub { font-size: 13px; line-height: 1.6; }
+  .search-bar { max-width: calc(100% - 36px); margin-top: 30px; padding: 16px; }
+  .search-field { flex-basis: 100%; min-height: 38px; }
+  .btn-find { width: 100%; min-height: 48px; justify-content: center; }
+  .about, .reviews { padding-top: 68px; }
+  .promo { height: auto; min-height: 360px; }
+  .testimonials { min-height: 540px; }
+  .tm-inner { padding: 70px 18px; }
+  .tm-quote { font-size: 17px; }
+  .happy { padding-top: 68px; }
+  .blog { padding-top: 68px; }
+  .blog-head { gap: 20px; margin-bottom: 30px; }
+  .blog-card, .rev-card, .dest-card { flex-basis: calc(100vw - 52px); }
+  .blog-media { height: 220px; }
+  .blog-title { font-size: 18px; }
+  .rev-card { padding: 20px 18px; }
+  .rev-img { height: 138px; }
+
+  /* Informational pages */
+  .about-hero-inner { padding: 0 18px; }
+  .about-hero h1 { font-size: 30px; }
+  .about-story { padding-top: 56px; padding-bottom: 60px; }
+  .about-section-head h2 { font-size: 27px; }
+  .contact-main { padding: 72px 18px 58px; }
+  .contact-form h1 { font-size: 29px; }
+  .contact-details li { align-items: flex-start; font-size: 14px; }
+  .contact-details b { width: 38px; height: 38px; flex: none; }
+  .discover-section { padding: 48px 0 68px; }
+  .discover-img img { height: 230px; }
+  .discover-img-pair img { height: 200px; }
+
+  /* Flights, hotels and listing pages */
+  .fhero { height: 440px; margin: 82px 12px 0; border-radius: 16px; }
+  .fhero-content { padding: 0 18px; }
+  .fhero-title { font-size: 27px; }
+  .fdest-section, .deals-section { padding-top: 58px; }
+  .kayak-section, .th-section { padding-bottom: 68px; }
+  .kayak-feature, .th-feature { min-height: 360px; padding: 28px 24px; }
+  .kayak-feature h3, .th-feature h3 { font-size: 24px; }
+  .kayak-photos, .th-photos { gap: 12px; height: 270px; }
+  .rs-section { padding-top: 46px; }
+  .deals-title { font-size: 25px; }
+  .deals-tabs { justify-content: flex-start; overflow-x: auto; white-space: nowrap; }
+  .deals-grid { width: 100%; grid-template-columns: minmax(0, 1fr); }
+  .deal-card { width: 100%; max-width: 360px; justify-self: center; }
+  .filter-bar { margin-left: 0; margin-right: 0; }
+  .hlist-tabs { overflow-x: auto; padding-bottom: 4px; flex-wrap: nowrap; }
+  .hlist-tab { white-space: nowrap; }
+  .hlist-actions { flex-wrap: wrap; }
+  .hlist-book { min-width: 180px; }
+  .pkg-row { margin-top: 28px; }
+
+  /* Authentication, dashboard and utility pages */
+  .login-shell { padding: 20px 14px; align-items: flex-start; }
+  .login-card { margin: 18px 0; padding: 38px 20px 32px; border-radius: 18px; }
+  .login-title { font-size: 29px; }
+  .lg-row { align-items: flex-start; flex-direction: column; gap: 14px; }
+  .lg-forgot { margin-left: 31px; }
+  .settings-card { padding: 26px 18px; border-radius: 16px; }
+  .settings-actions { align-items: flex-start; flex-direction: column; }
+  .db-content { padding: 22px 16px; }
+  .db-topbar { height: 62px; padding: 0 16px; gap: 10px; }
+  .db-main { padding-top: 62px; }
+  .db-page-title { font-size: 17px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .db-user-name, .db-user-role { display: none; }
+  .db-band { padding: 28px 20px; border-radius: 16px; }
+  .dash-hero-grid { gap: 26px; }
+  .dash-stats { gap: 10px; }
+  .dash-stat { padding: 13px 8px; }
+  .dash-trip-body { padding: 22px 18px; }
+  .dash-trip-dates { align-items: flex-start; }
+  .trip-side { align-items: flex-start; flex-wrap: wrap; }
+  .trip-side .btn-outline { margin-left: 0; }
+  .not-found-shell { padding: 24px 18px; }
+  .not-found-card { border-radius: 20px; }
+}
+
+@media (max-width: 380px) {
+  .nav-logo, .nav-logo img { height: 22px; }
+  .hero-title { font-size: 26px; }
+  .footer-grid, .why-grid, .travel-types { grid-template-columns: 1fr; }
+  .footer-brand, .footer-bottom { grid-column: auto; }
+  .team-grid img { height: 180px; }
+  .lg-social { gap: 8px; }
+  .lg-social-btn { height: 44px; }
+  .dash-stats { grid-template-columns: 1fr; }
 }

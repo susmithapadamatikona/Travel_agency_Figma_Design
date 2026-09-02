@@ -14,6 +14,58 @@
 
   function on(el, evt, fn, opts) { if (el) el.addEventListener(evt, fn, opts || false); }
 
+  /* ===========================================================
+     SITE PRELOADER
+     =========================================================== */
+  function initPreloader() {
+    /* Recovery links from the 404 page should open their destination without
+       showing the normal navigation overlay. */
+    if (new URLSearchParams(window.location.search).has('instantNav')) return;
+    if (!document.body || document.getElementById('sitePreloader')) return;
+
+    var preloader = document.createElement('div');
+    preloader.id = 'sitePreloader';
+    preloader.className = 'site-preloader';
+    preloader.setAttribute('role', 'status');
+    preloader.setAttribute('aria-label', 'Loading Stackly');
+    preloader.innerHTML = '<div class="site-preloader__content">' +
+      '<img class="site-preloader__logo" src="assets/images/logo-white.webp" alt="Stackly" />' +
+      '<span class="site-preloader__spinner" aria-hidden="true"></span>' +
+      '</div>';
+    document.body.insertBefore(preloader, document.body.firstChild);
+    var shownAt = performance.now();
+    var navigating = false;
+
+    function hidePreloader() {
+      var remaining = Math.max(0, 300 - (performance.now() - shownAt));
+      window.setTimeout(function () {
+        if (!navigating) preloader.classList.add('is-hidden');
+      }, remaining);
+    }
+
+    /* Hold normal internal navigation briefly so the Stackly wordmark is
+       always visible before the next document replaces this page. */
+    on(document, 'click', function (event) {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      var link = event.target.closest && event.target.closest('a[href]');
+      if (!link || link.target || link.hasAttribute('download') || link.hasAttribute('data-immediate-nav')) return;
+
+      var href = link.getAttribute('href');
+      if (!href || href.charAt(0) === '#' || /^(mailto:|tel:|javascript:)/i.test(href) || link.origin !== window.location.origin) return;
+      if (link.pathname === window.location.pathname && link.search === window.location.search) return;
+
+      event.preventDefault();
+      navigating = true;
+      preloader.classList.remove('is-hidden');
+      window.setTimeout(function () { window.location.assign(link.href); }, 320);
+    });
+
+    if (document.readyState === 'complete') window.requestAnimationFrame(hidePreloader);
+    else window.addEventListener('load', hidePreloader, { once: true });
+  }
+
+  initPreloader();
+
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   var MONTHS_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   var DOW = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
@@ -120,9 +172,34 @@
   }
 
   /* ===========================================================
-     3. SCROLL-REVEAL ANIMATIONS
+     3. AOS-STYLE SCROLL-REVEAL ANIMATIONS
      =========================================================== */
+  function applyAosTargets() {
+    /* Apply a restrained stagger to page sections and repeated content cards.
+       `data-aos` keeps the markup extensible while the local observer avoids
+       adding a network dependency to every page. */
+    var targets = $$('main > section, main article, .footer, .db-band, .db-section');
+    var groups = new Map();
+
+    targets.forEach(function (el) {
+      if (el.hasAttribute('data-aos')) return;
+      if (el.hasAttribute('data-reveal')) {
+        el.setAttribute('data-aos', 'fade-up');
+        return;
+      }
+      var parent = el.parentElement;
+      var index = groups.get(parent) || 0;
+      groups.set(parent, index + 1);
+
+      var effect = 'fade-up';
+      if (el.tagName === 'ARTICLE') effect = index % 3 === 0 ? 'fade-right' : (index % 3 === 1 ? 'fade-up' : 'fade-left');
+      el.setAttribute('data-aos', effect);
+      el.setAttribute('data-reveal', '');
+    });
+  }
+
   function initReveal() {
+    applyAosTargets();
     var els = $$('[data-reveal]');
     if (!els.length) return;
 
@@ -147,7 +224,8 @@
       var parent = el.parentElement;
       var idx = counts.get(parent) || 0;
       counts.set(parent, idx + 1);
-      el.style.transitionDelay = Math.min(idx, 3) * 80 + 'ms';
+      el.style.transitionDelay = Math.min(idx, 4) * 80 + 'ms';
+      el.style.setProperty('--aos-duration', el.getAttribute('data-aos-duration') || '700ms');
       io.observe(el);
     });
   }
@@ -223,12 +301,12 @@
     if (cards.length < 2) return;
 
     var DATA = [
-      { name: 'Lyod Gomez',  avatar: 'assets/images/avatars/av-33.jpg' },
-      { name: 'Lyod Gomez',  avatar: 'assets/images/avatars/av-52.jpg' },
-      { name: 'Maria Chen',  avatar: 'assets/images/avatars/av-11.jpg' },
-      { name: 'James Carter', avatar: 'assets/images/avatars/av-13.jpg' },
-      { name: 'Priya Nair',  avatar: 'assets/images/avatars/av-23.jpg' },
-      { name: 'Tom Becker',  avatar: 'assets/images/avatars/av-45.jpg' }
+      { name: 'Lyod Gomez',  avatar: 'assets/images/avatars/av-33.webp' },
+      { name: 'Lyod Gomez',  avatar: 'assets/images/avatars/av-52.webp' },
+      { name: 'Maria Chen',  avatar: 'assets/images/avatars/av-11.webp' },
+      { name: 'James Carter', avatar: 'assets/images/avatars/av-13.webp' },
+      { name: 'Priya Nair',  avatar: 'assets/images/avatars/av-23.webp' },
+      { name: 'Tom Becker',  avatar: 'assets/images/avatars/av-45.webp' }
     ];
     var TEXT = 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure';
 
@@ -355,6 +433,69 @@
         else destRow.scrollBy({ left: -step, behavior: 'smooth' });
       });
     }
+
+    [destRow, revRow, blogRow].forEach(initCardSwiper);
+  }
+
+  /* ===========================================================
+     7. PLACEHOLDER ACTIONS → 404
+     =========================================================== */
+  function initNotFoundLinks() {
+    /* Footer/social/auth links and any remaining # placeholder actions point
+       to one clear destination until their real pages are available. */
+    var links = $$('a[href="#"], .footer-social a, .footer-col a, .lg-forgot, .lg-social a, .lg-row--agree a');
+    links.forEach(function (link) {
+      link.setAttribute('href', '404.html');
+      on(link, 'click', function () {
+        /* Keep the exact source page as the 404 return route. */
+        sessionStorage.setItem('stackly404Return', window.location.href);
+      });
+    });
+
+    $$('.fdest-book, .kayak-book, .th-book, .hlist-book').forEach(function (button) {
+      on(button, 'click', function (event) {
+        event.preventDefault();
+        sessionStorage.setItem('stackly404Return', window.location.href);
+        window.location.assign('404.html');
+      });
+    });
+  }
+
+  function initNotFoundPage() {
+    var backButton = $('#notFoundBack');
+    if (!backButton) return;
+    on(backButton, 'click', function () {
+      if (window.history.length > 1) window.history.back();
+      else window.location.assign('index.html');
+    });
+  }
+
+  /* Swiper-style autoplay layer for the existing accessible, native-scroll
+     card rows. Native scrolling retains mouse drag, touch swiping and arrow
+     key support without restructuring the card markup. */
+  function initCardSwiper(row) {
+    if (!row || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var timer = null;
+
+    function advance() {
+      if (row.scrollWidth <= row.clientWidth + 8) return;
+      var atEnd = row.scrollLeft + row.clientWidth >= row.scrollWidth - 12;
+      if (atEnd) row.scrollTo({ left: 0, behavior: 'smooth' });
+      else row.scrollBy({ left: Math.max(280, Math.round(row.clientWidth * .82)), behavior: 'smooth' });
+    }
+    function start() {
+      if (!timer) timer = window.setInterval(advance, 4800);
+    }
+    function stop() {
+      if (timer) { window.clearInterval(timer); timer = null; }
+    }
+
+    on(row, 'mouseenter', stop);
+    on(row, 'mouseleave', start);
+    on(row, 'focusin', stop);
+    on(row, 'focusout', function () { window.setTimeout(start, 0); });
+    on(document, 'visibilitychange', function () { if (document.hidden) stop(); else start(); });
+    start();
   }
 
   /* ===========================================================
@@ -628,6 +769,244 @@
     });
   }
 
+  /* ---- shared footer copy ---- */
+  function initFooterContent() {
+    $$('.footer').forEach(function (footer) {
+      var brand = $('.footer-brand', footer);
+      var grid = $('.footer-grid', footer);
+      var social = $('.footer-social', footer);
+      if (social) {
+        ['Facebook', 'Twitter', 'YouTube', 'Instagram'].forEach(function (label, index) {
+          var link = social.children[index];
+          if (link && !link.getAttribute('aria-label')) link.setAttribute('aria-label', label);
+        });
+      }
+      if (brand && !$('.footer-description', brand)) {
+        var description = document.createElement('p');
+        description.className = 'footer-description';
+        description.textContent = 'Travel the way you wish to go. Discover more with Phnes Travels.';
+        brand.appendChild(description);
+      }
+      /* keep the social icons directly after the brand text instead of
+         landing in their own grid row (which pushed them far down,
+         underneath whichever footer column happened to be tallest) */
+      if (brand && social && social.parentElement !== brand) {
+        brand.appendChild(social);
+      }
+      if (grid && !$('.footer-bottom', grid)) {
+        var bottom = document.createElement('div');
+        bottom.className = 'footer-bottom';
+        bottom.innerHTML = '<span>© 2026 Phnes Travels. All rights reserved.</span><span>Made for memorable journeys.</span>';
+        grid.appendChild(bottom);
+      }
+    });
+  }
+
+  /* ---- password visibility toggles (login + signup) ----
+     each .lg-eye points at its input via data-eye; the login
+     page's single button predates that, so #lgEye falls back
+     to #lgPassword. */
+  function initPasswordToggle() {
+    $$('.lg-eye').forEach(function (eye) {
+      var id = eye.getAttribute('data-eye') || 'lgPassword';
+      var input = document.getElementById(id);
+      if (!input) return;
+      eye.addEventListener('click', function () {
+        var showing = input.getAttribute('type') === 'text';
+        input.setAttribute('type', showing ? 'password' : 'text');
+        eye.setAttribute('aria-pressed', String(!showing));
+        eye.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+        eye.classList.toggle('is-showing', !showing);
+      });
+    });
+  }
+
+  /* ---- auth forms: validate, remember who signed in, then
+     hand over to the dashboard. Front-end only — there is no
+     backend, so any well-formed credentials are accepted. ---- */
+  function validateAuthField(input) {
+    var ok = true;
+    var value = (input.value || '').trim();
+    if (!value) ok = false;
+    else if (input.type === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    input.classList.toggle('is-invalid', !ok);
+    return ok;
+  }
+
+  function rememberUser(fields) {
+    try { localStorage.setItem('phnesUser', JSON.stringify(fields)); } catch (e) { /* private mode */ }
+  }
+
+  function readUser() {
+    try { return JSON.parse(localStorage.getItem('phnesUser') || 'null'); } catch (e) { return null; }
+  }
+
+  function initAuthForms() {
+    var login = $('#loginForm');
+    if (login) {
+      login.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var email = $('#lgEmail');
+        var password = $('#lgPassword');
+        var valid = validateAuthField(email);
+        valid = validateAuthField(password) && valid;
+        if (!valid) return;
+        var role = $('#lgRole');
+        var existing = readUser() || {};
+        rememberUser({
+          name: existing.name || '',
+          email: email.value.trim(),
+          role: role ? role.value : 'traveller'
+        });
+        window.location.href = 'dashboard.html';
+      });
+      [$('#lgEmail'), $('#lgPassword')].forEach(function (el) {
+        on(el, 'input', function () { el.classList.remove('is-invalid'); });
+      });
+    }
+
+    var signup = $('#signupForm');
+    if (signup) {
+      signup.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var inputs = [$('#suName'), $('#suEmail'), $('#suPhone'), $('#suPassword'), $('#suConfirm')];
+        var valid = true;
+        inputs.forEach(function (el) { valid = validateAuthField(el) && valid; });
+        var confirmEl = $('#suConfirm');
+        if (valid && $('#suPassword').value !== confirmEl.value) {
+          confirmEl.classList.add('is-invalid');
+          valid = false;
+        }
+        if (!valid) return;
+        var role = $('#suRole');
+        rememberUser({
+          name: $('#suName').value.trim(),
+          email: $('#suEmail').value.trim(),
+          role: role ? role.value : 'traveller'
+        });
+        window.location.href = 'dashboard.html';
+      });
+      $$('#signupForm .lg-input').forEach(function (el) {
+        on(el, 'input', function () { el.classList.remove('is-invalid'); });
+      });
+    }
+  }
+
+  /* ---- dashboard shell: shared by every sidebar page ---- */
+  var ROLE_LABELS = { traveller: 'Traveller', agent: 'Travel Agent', admin: 'Admin' };
+  function roleLabel(user) {
+    return (user && user.role && ROLE_LABELS[user.role]) || 'Traveller';
+  }
+  function displayEmail(user) {
+    return (user && user.email) || 'ann.pine@gmail.com';
+  }
+
+  function displayUserName(user) {
+    if (user && user.name) return user.name;
+    if (user && user.email) {
+      return user.email.split('@')[0].replace(/[._-]+/g, ' ')
+        .replace(/\b\w/g, function (ch) { return ch.toUpperCase(); });
+    }
+    return 'Ann Pine';
+  }
+
+  function initDbShell() {
+    var sidebar = $('#dbSidebar');
+    if (!sidebar) return;
+
+    var user = readUser();
+    var dbName = $('.db-user-name');
+    if (dbName) dbName.textContent = displayUserName(user);
+    var dbEmail = $('.db-user-email');
+    if (dbEmail) dbEmail.textContent = displayEmail(user);
+    var dbRole = $('.db-user-role');
+    if (dbRole) dbRole.textContent = roleLabel(user);
+
+    var logout = $('#dbLogout');
+    on(logout, 'click', function () {
+      try { localStorage.removeItem('phnesUser'); } catch (e) {}
+      window.location.href = 'login.html';
+    });
+
+    var burger = $('#dbBurger');
+    if (burger) {
+      burger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = sidebar.classList.toggle('is-open');
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('click', function (e) {
+        if (sidebar.classList.contains('is-open') && !sidebar.contains(e.target)) {
+          sidebar.classList.remove('is-open');
+          burger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+  }
+
+  /* ---- dashboard home: greeting + role chip ---- */
+  function initDashboard() {
+    var greeting = $('#dashGreeting');
+    if (!greeting) return;
+    var user = readUser();
+    greeting.textContent = 'Welcome back, ' + displayUserName(user);
+    var chip = $('#dashRole');
+    if (chip) chip.textContent = roleLabel(user);
+    var emailEl = $('#dashEmail');
+    if (emailEl) emailEl.textContent = displayEmail(user);
+    var roleText = $('#dashRoleText');
+    if (roleText) roleText.textContent = roleLabel(user);
+    var navName = $('.nav-account-name');
+    if (navName) navName.textContent = displayUserName(user);
+  }
+
+  /* ---- favourites page: heart toggles ---- */
+  function initFavHearts() {
+    $$('.fav-heart').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var on = btn.classList.toggle('is-on');
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+    });
+  }
+
+  /* ---- settings page: edit the stored profile ---- */
+  function initSettings() {
+    var form = $('#settingsForm');
+    if (!form) return;
+    var user = readUser() || {};
+    var nameEl = $('#stName'), emailEl = $('#stEmail'),
+        phoneEl = $('#stPhone'), roleEl = $('#stRole');
+    if (user.name) nameEl.value = user.name;
+    if (user.email) emailEl.value = user.email;
+    if (user.phone) phoneEl.value = user.phone;
+    if (user.role) roleEl.value = user.role;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var valid = validateAuthField(nameEl);
+      valid = validateAuthField(emailEl) && valid;
+      if (!valid) return;
+      rememberUser({
+        name: nameEl.value.trim(),
+        email: emailEl.value.trim(),
+        phone: phoneEl.value.trim(),
+        role: roleEl ? roleEl.value : 'traveller'
+      });
+      var dbName = $('.db-user-name');
+      if (dbName) dbName.textContent = displayUserName(readUser());
+      var note = $('#settingsSaved');
+      if (note) {
+        note.hidden = false;
+        clearTimeout(note._t);
+        note._t = setTimeout(function () { note.hidden = true; }, 2600);
+      }
+    });
+    $$('#settingsForm .lg-input').forEach(function (el) {
+      on(el, 'input', function () { el.classList.remove('is-invalid'); });
+    });
+  }
+
   /* ===========================================================
      init
      =========================================================== */
@@ -639,9 +1018,18 @@
     initTestimonials();
     initHappyCustomers();
     initCarousels();
+    initNotFoundLinks();
+    initNotFoundPage();
     initSearch();
     initTabGroups();
     initFavouriteButtons();
+    initFooterContent();
+    initPasswordToggle();
+    initAuthForms();
+    initDbShell();
+    initDashboard();
+    initSettings();
+    initFavHearts();
   }
 
   if (document.readyState === 'loading') {

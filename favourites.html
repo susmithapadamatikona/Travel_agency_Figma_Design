@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Favourites — Phines Travels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="db-body">
+
+<!-- ============ SIDEBAR ============ -->
+<aside class="db-sidebar" id="dbSidebar">
+  <a href="index.html" class="db-logo" aria-label="Stackly home">
+    <img src="assets/images/logo-white.webp" alt="Stackly" />
+  </a>
+
+  <nav class="db-menu" aria-label="Dashboard">
+    <a href="dashboard.html" class="db-link">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg>
+      Dashboard
+    </a>
+    <a href="trips.html" class="db-link">
+      <svg viewBox="0 0 24 24"><path d="M4 8h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg>
+      My Trips
+    </a>
+    <a href="book-flight.html" class="db-link">
+      <svg viewBox="0 0 24 24"><path d="M10.5 13.5 3 11l1.5-1.5 6.5.9 4.6-4.6a1.6 1.6 0 0 1 2.3 2.3L13.3 12l.9 6.5L12.7 20l-2.5-7.5Z"/><path d="m5 19 2.5-2.5"/></svg>
+      Book a Flight
+    </a>
+    <a href="book-hotel.html" class="db-link">
+      <svg viewBox="0 0 24 24"><path d="M3 20V6M3 16h18v4M3 12h11a4 4 0 0 1 4 4"/><circle cx="7.5" cy="9.5" r="1.8"/></svg>
+      Book a Hotel
+    </a>
+    <a href="explore.html" class="db-link">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5Z"/></svg>
+      Explore Places
+    </a>
+    <a href="favourites.html" class="db-link is-active">
+      <svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4a4.9 4.9 0 0 1 6.6 2 4.9 4.9 0 0 1 6.6-2c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg>
+      Favourites
+    </a>
+    <a href="settings.html" class="db-link">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .34 1.87l.06.06a2.05 2.05 0 1 1-2.9 2.9l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V20a2.05 2.05 0 1 1-4.1 0v-.09a1.7 1.7 0 0 0-1.1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2.05 2.05 0 1 1-2.9-2.9l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.55-1H4a2.05 2.05 0 1 1 0-4.1h.09A1.7 1.7 0 0 0 5.64 9.4a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2.05 2.05 0 1 1 2.9-2.9l.06.06a1.7 1.7 0 0 0 1.87.34H10a1.7 1.7 0 0 0 1-1.55V3a2.05 2.05 0 1 1 4.1 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2.05 2.05 0 1 1 2.9 2.9l-.06.06a1.7 1.7 0 0 0-.34 1.87V9.4a1.7 1.7 0 0 0 1.55 1H20a2.05 2.05 0 1 1 0 4.1h-.09a1.7 1.7 0 0 0-1.55 1Z"/></svg>
+      Settings
+    </a>
+  </nav>
+
+  <button type="button" class="db-link db-logout" id="dbLogout">
+    <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+    Logout
+  </button>
+</aside>
+
+<!-- ============ MAIN ============ -->
+<div class="db-main">
+
+  <header class="db-topbar">
+    <button class="db-burger" id="dbBurger" aria-label="Toggle menu" aria-expanded="false" aria-controls="dbSidebar">
+      <span></span><span></span><span></span>
+    </button>
+    <h1 class="db-page-title">Favourites</h1>
+    <div class="db-user">
+      <div class="db-user-meta">
+        <span class="db-user-name">Ann Pine</span>
+        <span class="db-user-email">ann.pine@gmail.com</span>
+        <span class="db-user-role">Traveller</span>
+      </div>
+      <span class="nav-avatar-wrap">
+        <img src="assets/images/avatars/av-32.webp" alt="" />
+        <span class="nav-avatar-dot"></span>
+      </span>
+    </div>
+  </header>
+
+  <div class="db-content">
+
+    <section class="db-section" style="margin-top:0">
+      <p class="db-lede">8 saved places &middot; tap the heart to remove one from your list.</p>
+      <div class="deals-grid fav-grid">
+        <article class="deal-card">
+          <div class="deal-img">
+            <img src="assets/images/dp-borabora.webp" alt="Bora Bora" draggable="false" />
+            <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>French Polynesia</span>
+            <button class="fav-heart is-on" aria-label="Remove Bora Bora from favourites" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4a4.9 4.9 0 0 1 6.6 2 4.9 4.9 0 0 1 6.6-2c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg></button>
+          </div>
+          <h3 class="deal-name">Bora Bora</h3>
+          <p class="deal-sub">Saved 2 weeks ago</p>
+          <div class="deal-meta"><span class="deal-price">620$</span><a href="hotels.html" class="deal-more">View More &rarr;</a></div>
+        </article>
+        <article class="deal-card">
+          <div class="deal-img">
+            <img src="assets/images/dp-paris.webp" alt="Paris" draggable="false" />
+            <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>France</span>
+            <button class="fav-heart is-on" aria-label="Remove Paris from favourites" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4a4.9 4.9 0 0 1 6.6 2 4.9 4.9 0 0 1 6.6-2c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg></button>
+          </div>
+          <h3 class="deal-name">Paris</h3>
+          <p class="deal-sub">Saved 3 weeks ago</p>
+          <div class="deal-meta"><span class="deal-price">600$</span><a href="flights.html" class="deal-more">View More &rarr;</a></div>
+        </article>
+        <article class="deal-card">
+          <div class="deal-img">
+            <img src="assets/images/dp-bali.webp" alt="Bali" draggable="false" />
+            <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Indonesia</span>
+            <button class="fav-heart is-on" aria-label="Remove Bali from favourites" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4a4.9 4.9 0 0 1 6.6 2 4.9 4.9 0 0 1 6.6-2c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg></button>
+          </div>
+          <h3 class="deal-name">Bali</h3>
+          <p class="deal-sub">Saved 1 month ago</p>
+          <div class="deal-meta"><span class="deal-price">540$</span><a href="hotels.html" class="deal-more">View More &rarr;</a></div>
+        </article>
+        <article class="deal-card">
+          <div class="deal-img">
+            <img src="assets/images/dest-phuket.webp" alt="Phuket" draggable="false" />
+            <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Thailand</span>
+            <button class="fav-heart is-on" aria-label="Remove Phuket from favourites" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4a4.9 4.9 0 0 1 6.6 2 4.9 4.9 0 0 1 6.6-2c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg></button>
+          </div>
+          <h3 class="deal-name">Phuket</h3>
+          <p class="deal-sub">Saved 1 month ago</p>
+          <div class="deal-meta"><span class="deal-price">650$</span><a href="flights.html" class="deal-more">View More &rarr;</a></div>
+        </article>
+        <article class="deal-card">
+          <div class="deal-img">
+            <img src="assets/images/dp-rome.webp" alt="Rome" draggable="false" />
+            <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Italy</span>
+            <button class="fav-heart is-on" aria-label="Remove Rome from favourites" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4a4.9 4.9 0 0 1 6.6 2 4.9 4.9 0 0 1 6.6-2c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg></button>
+          </div>
+          <h3 class="deal-name">Rome</h3>
+          <p class="deal-sub">Saved 2 months ago</p>
+          <div class="deal-meta"><span class="deal-price">560$</span><a href="hotels.html" class="deal-more">View More &rarr;</a></div>
+        </article>
+        <article class="deal-card">
+          <div class="deal-img">
+            <img src="assets/images/dp-stlucia.webp" alt="St Lucia" draggable="false" />
+            <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Caribbean</span>
+            <button class="fav-heart is-on" aria-label="Remove St Lucia from favourites" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4a4.9 4.9 0 0 1 6.6 2 4.9 4.9 0 0 1 6.6-2c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg></button>
+          </div>
+          <h3 class="deal-name">St Lucia</h3>
+          <p class="deal-sub">Saved 2 months ago</p>
+          <div class="deal-meta"><span class="deal-price">700$</span><a href="flights.html" class="deal-more">View More &rarr;</a></div>
+        </article>
+        <article class="deal-card">
+          <div class="deal-img">
+            <img src="assets/images/dp-london.webp" alt="London" draggable="false" />
+            <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>United Kingdom</span>
+            <button class="fav-heart is-on" aria-label="Remove London from favourites" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4a4.9 4.9 0 0 1 6.6 2 4.9 4.9 0 0 1 6.6-2c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg></button>
+          </div>
+          <h3 class="deal-name">London</h3>
+          <p class="deal-sub">Saved 3 months ago</p>
+          <div class="deal-meta"><span class="deal-price">450$</span><a href="flights.html" class="deal-more">View More &rarr;</a></div>
+        </article>
+        <article class="deal-card">
+          <div class="deal-img">
+            <img src="assets/images/dp-dubai.webp" alt="Dubai" draggable="false" />
+            <span class="deal-loc"><svg viewBox="0 0 24 24" class="ic-pin"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>United Arab Emirates</span>
+            <button class="fav-heart is-on" aria-label="Remove Dubai from favourites" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4a4.9 4.9 0 0 1 6.6 2 4.9 4.9 0 0 1 6.6-2c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg></button>
+          </div>
+          <h3 class="deal-name">Dubai</h3>
+          <p class="deal-sub">Saved 3 months ago</p>
+          <div class="deal-meta"><span class="deal-price">520$</span><a href="hotels.html" class="deal-more">View More &rarr;</a></div>
+        </article>
+      </div>
+    </section>
+
+    <p class="db-foot">&copy; 2026 Phnes Travels. All rights reserved.</p>
+  </div>
+</div>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
