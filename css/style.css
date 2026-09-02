@@ -455,11 +455,36 @@ ul  { list-style: none; }
   height: 74px;
   background: #fff;
   border-radius: 12px;
-  padding: 0 12px 0 22px;
+  padding: 0 12px;
+  gap: 2px;
   box-shadow: 0 14px 40px rgba(6, 26, 30, .18);
 }
-.search-field { position: relative; display: flex; align-items: center; gap: 9px; flex: 1; min-width: 0; }
-.search-field.has-error { animation: field-shake .35s ease; }
+/* each field reads as its own bordered control rather than plain text
+   separated by hairlines, so the tappable target is obvious */
+.search-field {
+  position: relative;
+  display: flex; align-items: center; gap: 9px;
+  flex: 1; min-width: 0;
+  height: 50px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.search-field:hover { border-color: var(--teal-deep); background: #f7fbfb; }
+/* keyboard focus and the open dropdown share one emphasised state */
+.search-field:focus-within,
+.search-field.is-open {
+  border-color: var(--teal-deep);
+  box-shadow: 0 0 0 2px rgba(16, 71, 74, .12);
+  background: #fff;
+}
+.search-field:hover .ic,
+.search-field:focus-within .ic,
+.search-field.is-open .ic { stroke: var(--teal-deep); }
+.search-field.has-error { animation: field-shake .35s ease; border-color: #e0574f; }
 .search-field.has-error input::placeholder { color: #e0574f; }
 @keyframes field-shake {
   20%, 80% { transform: translateX(-3px); }
@@ -479,8 +504,12 @@ ul  { list-style: none; }
   background: transparent;
 }
 .search-field input::placeholder { color: #8b93a0; }
+/* the readonly fields open a dropdown, so the whole control is a button */
+.search-field input[readonly] { cursor: pointer; }
 
-.search-div { width: 1px; height: 30px; background: var(--line); flex: none; margin: 0 8px; }
+/* the bordered fields separate themselves now, so the hairline
+   dividers only add noise — kept in the DOM as spacing */
+.search-div { width: 0; flex: none; margin: 0 5px; }
 
 .btn-find {
   display: inline-flex;
@@ -2982,7 +3011,7 @@ ul  { list-style: none; }
   .hero-title { font-size: 29px; }
   .hero-sub { font-size: 13px; line-height: 1.6; }
   .search-bar { max-width: calc(100% - 36px); margin-top: 30px; padding: 16px; }
-  .search-field { flex-basis: 100%; min-height: 38px; }
+  .search-field { flex-basis: 100%; height: 46px; }
   .btn-find { width: 100%; min-height: 48px; justify-content: center; }
   .about, .reviews { padding-top: 68px; }
   .promo { height: auto; min-height: 360px; }
