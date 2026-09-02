@@ -892,6 +892,39 @@
     }
   }
 
+  /* ---- contact form: validate, then confirm inline. Front-end
+     only — there is no backend, so nothing is actually sent. ---- */
+  function initContactForm() {
+    var form = $('#contactForm');
+    if (!form) return;
+    var fields = [$('#ctName'), $('#ctEmail'), $('#ctMessage')];
+    var success = $('#ctSuccess');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var valid = true;
+      fields.forEach(function (el) { valid = validateAuthField(el) && valid; });
+      if (!valid) {
+        if (success) success.hidden = true;
+        return;
+      }
+      form.reset();
+      if (success) {
+        success.hidden = false;
+        success.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    });
+
+    /* clear the error ring — and any stale confirmation — as soon as
+       the visitor starts correcting the field */
+    fields.forEach(function (el) {
+      on(el, 'input', function () {
+        el.classList.remove('is-invalid');
+        if (success) success.hidden = true;
+      });
+    });
+  }
+
   /* ---- dashboard shell: shared by every sidebar page ---- */
   var ROLE_LABELS = { traveller: 'Traveller', agent: 'Travel Agent', admin: 'Admin' };
   function roleLabel(user) {
@@ -1026,6 +1059,7 @@
     initFooterContent();
     initPasswordToggle();
     initAuthForms();
+    initContactForm();
     initDbShell();
     initDashboard();
     initSettings();
